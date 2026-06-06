@@ -44,11 +44,11 @@ sudo dnf in -y git || true
 mkdir -p $local_path
 cd $local_path
 
-if ! [ -z "$(ls -A)" ]; then
+if [ -z "$(ls -A)" ]; then
   git clone https://github.com/flawada/mango
 fi
 
 cd ${local_path}/mango
-echo test
 
+chmod +x install.sh
 ./install.sh
