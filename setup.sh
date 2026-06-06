@@ -48,6 +48,6 @@ if ! [ -z "$(ls -A)" ]; then
   git clone https://github.com/flawada/mango
 fi
 
-cd $local_path/mango
+cd ${local_path}/mango
 
 ./install.sh
