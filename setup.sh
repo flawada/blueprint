@@ -40,7 +40,7 @@ if ! grep -q '^ID=fedora' /etc/os-release; then
   esac
 fi
 
-sudo dnf in -y git || true
+sudo dnf in -y git
 mkdir -p $local_path
 cd $local_path
 
@@ -48,7 +48,9 @@ if [ -z "$(ls -A)" ]; then
   git clone https://github.com/flawada/mango
 fi
 
-cd ${local_path}/mango
+sudo dnf in -y --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
+sudo dnf in -y mangowm
 
-chmod +x install.sh
-./install.sh
+mkdir -p ~/.config/mango
+echo python ${local_path}/install.py > ~/.config/mango/config.conf
+mango
