@@ -53,6 +53,9 @@ fi
 sudo dnf in -y --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
 sudo dnf in -y mangowm
 
+sudo dnf in -y python3-pip
+pip install PySide6
+
 mkdir -p ~/.config/mango
 echo exec-once = python ${local_path}/mango/install.py > ~/.config/mango/config.conf
 mango
