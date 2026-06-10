@@ -1,4 +1,4 @@
-# mango
+# fedora mangowm
 install script for fedora everything
 
 in work, dont use
