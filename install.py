@@ -243,6 +243,7 @@ class InstallerWindow(QMainWindow):
         """Handle installation"""
         print("Installing with options:", self.install_options)
         run(["pkill","mango"])
+        run(["clear"])
         self.close()
     
     def go_to_page(self, page_index):
