@@ -58,9 +58,4 @@ pip install PySide6
 
 sudo dnf in -y mesa-libgbm mesa-libGL
 
-mkdir -p ~/.config/mango
-echo exec-once = python /tmp/mango/install.py > ~/.config/mango/config.conf
-echo cursor_size = 24 >> ~/.config/mango/config.conf
-echo cursor_theme = hicolor >> ~/.config/mango/config.conf
-echo env= WLR_NO_HARDWARE_CURSORS,1 >> ~/.config/mango/config.conf # Change to 0 later
 mango -c /tmp/mango/config.conf
