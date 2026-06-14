@@ -11,7 +11,7 @@ mako &
 # night light
 wlsunset -T 3501 -t 3500 &
 # wallpaper
-swaybg -i ~/Documents/wallpapers/wallhaven-xe7ylv.png &
+swaybg -i ~/.config/mango/wallpaper.png &
 #swww-daemon & 
 
 # bar

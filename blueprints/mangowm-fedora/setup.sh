@@ -11,5 +11,6 @@ curl -sS https://starship.rs/install.sh | sh -s -- -y
 echo 'eval "$(starship init bash)"' >> ~/.bashrc
 
 cp -r /tmp/blueprint/blueprints/mangowm-fedora/config/* ~/.config/
+curl -Lso ~/.config/mango/wallpaper.png https://w.wallhaven.cc/full/xe/wallhaven-xe7ylv.png
 
 mango
