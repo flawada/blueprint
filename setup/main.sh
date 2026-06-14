@@ -1,4 +1,4 @@
-cd ../blueprints
+cd /tmp/blueprint/blueprints
 
 
 blueprints=()
