@@ -1,5 +1,6 @@
-# fedora mangowm
-install script for fedora everything
+# blueprint
+
+config install script 
 
 in work, dont use
 
