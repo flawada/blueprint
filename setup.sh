@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 set -e
 
@@ -19,14 +19,10 @@ fi
 cd /tmp
 
 sudo dnf in -y git
+
+
 if ! [ -d "/tmp/blueprint" ]; then
   git clone https://github.com/flawada/blueprint
 fi
-
-#if ! rpm -q terra-release >/dev/null 2>&1; then
-#  sudo dnf in -y --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
-#fi
-#sudo dnf in -y mangowm
-#sudo dnf in -y mesa-libgbm mesa-libGL
 
 bash /tmp/blueprint/setup/main.sh
