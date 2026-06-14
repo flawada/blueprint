@@ -1,6 +1,5 @@
 clear
 
-
 cd /tmp/blueprint/blueprints
 
 blueprints=()
@@ -13,4 +12,7 @@ for blueprint in */; do
 done
 
 read -p "select blueprint: " item
-echo ${blueprints[$item]}
+
+cd ${blueprints[$item]}
+
+bash setup.sh
