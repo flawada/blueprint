@@ -12,7 +12,6 @@ mako &
 wlsunset -T 3501 -t 3500 &
 # wallpaper
 swaybg -i ~/.config/mango/wallpaper.png &
-#swww-daemon & 
 
 # bar
 waybar -c ~/.config/mango/waybar/config.jsonc -s ~/.config/mango/waybar/style.css &
@@ -31,5 +30,5 @@ fi
 #lock
 gtklock -b ~/.config/mango/wallpaper.png &
 
-# nvim
+# autostart apps
 #foot -e nvim &

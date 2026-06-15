@@ -11,7 +11,7 @@
     "format": "{player_icon}{title}",
     "player-icons": {
       "default": "<span></span>",
-      "spotify": "<span color='#1DB954'>  |</span>"
+      "spotify": "<span color='#a094b3'>  |</span>"
     },
     "max-length": 25,
     "on-click": "playerctl previous",
@@ -22,7 +22,7 @@
 
 /*
   "custom/menu": {
-    "format-icons": ["<span color='#e2d0a3'font='17.5'>⛶ </span>"],
+    "format-icons": ["<span color='#a094b3'font='17.5'>⛶ </span>"],
     "format": "{icon}",
     "tooltip": false,
     "on-click": "rofi -config ~/.config/mango/rofi/config.rasi -show drun -show-icons"
@@ -30,7 +30,7 @@
 */
 
   "custom/power": {
-    "format-icons": ["<span color='#e2d0a3'></span>"],
+    "format-icons": ["<span color='#a094b3'></span>"],
     "format": "{icon}",
     "tooltip": false,
     "on-click": "wlogout"
@@ -44,7 +44,7 @@
   },
   "network": {
     // "max-length": 10,
-    "format-wifi": "{essid}  <span color='#8aade0'></span>",
+    "format-wifi": "{essid}  <span color='#a094b3'></span>",
     "format-ethernet": "{ipaddr}/{cidr}",
     "tooltip-format": "{ifname} via {gwaddr}",
     "format-linked": "{ifname} (No IP)",
@@ -70,17 +70,17 @@
     }
   },
   "bluetooth": {
-    "format": "",
-    "format-disabled": "<span color='#db9a9a'>󰂲</span>",
+    "format": "<span color='#a094b3'></span>",
+    "format-disabled": "<span color='#a094b3'>󰂲</span>",
     "tooltip": false,
     "on-click": "blueman-manager"
   },
   "wireplumber": {
-    "format": "{volume}% <span color='#8aade0'>{icon}</span>",
+    "format": "{volume}% <span color='#a094b3'>{icon}</span>",
     "format-icons": {
       "default": ["", "", ""]
     },
-    "format-muted": "<span color='#8aade0'></span>",
+    "format-muted": "<span color='#a094b3'></span>",
     "on-click": "pavucontrol"
   },
   "battery": {
@@ -93,6 +93,6 @@
     "format-full": "{capacity}% {icon}",
     "format-charging": "{capacity}% ",
     "format-alt": "{time} {icon}",
-    "format-icons": ["<span color='#8aade0'></span>", "<span color='#8aade0'></span>", "<span color='#8aade0'></span>", "<span color='#8aade0'></span>", "<span color='#8aade0'></span>"]
+    "format-icons": ["<span color='#a094b3'></span>", "<span color='#a094b3'></span>", "<span color='#a094b3'></span>", "<span color='#a094b3'></span>", "<span color='#a094b3'></span>"]
   }
 }
