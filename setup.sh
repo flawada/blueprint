@@ -25,4 +25,25 @@ if ! [ -d "/tmp/blueprint" ]; then
   git clone https://github.com/flawada/blueprint
 fi
 
-bash /tmp/blueprint/setup/main.sh
+######
+
+clear
+
+cd /tmp/blueprint/blueprints
+
+blueprints=()
+i=0
+
+for blueprint in */; do
+  blueprints+=("$blueprint")
+  echo "$i) ${blueprint%/}"
+  ((i++))
+done
+
+read -p "select blueprint: " item
+
+cd ${blueprints[$item]}
+
+sudo dnf update -y
+
+bash setup.sh
