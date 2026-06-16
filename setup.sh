@@ -2,7 +2,7 @@
 
 clear
 
-#set -e
+set -e
 repo="config"
 
 if [ "$(uname)" != "Linux" ]; then
@@ -50,4 +50,5 @@ cd ${blueprints[$item]}
 
 sudo dnf update -y
 
-bash setup.sh
+chmod +x script.sh
+./setup.sh
