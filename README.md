@@ -4,5 +4,5 @@ in work, dont use
 
 
 ```bash
-bash <(curl -s "https://raw.githubusercontent.com/flawada/blueprint/main/setup.sh")
+bash <(curl "https://raw.githubusercontent.com/flawada/blueprint/main/setup.sh")
 ```

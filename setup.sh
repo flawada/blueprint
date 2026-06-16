@@ -1,5 +1,7 @@
 #!/bin/bash
 
+clear
+
 set -e
 repo="config"
 
@@ -42,7 +44,7 @@ done
 
 read -p "select blueprint: " item
 
-cd ${blueprints[$item]}
+cd "${blueprints[$item]}"
 
 sudo dnf update -y
 
