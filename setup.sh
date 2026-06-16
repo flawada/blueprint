@@ -44,7 +44,9 @@ done
 
 read -p "select blueprint: " item
 
-cd ${blueprints[$item]}
+clear
+
+cd "${blueprints[$item]}"
 
 sudo dnf update -y
 
