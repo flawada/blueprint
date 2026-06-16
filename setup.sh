@@ -17,7 +17,7 @@ cd /tmp
 sudo dnf in -y git
 
 if ! [ -d "/tmp/$repo" ]; then
-  git clone https://github.com
+  git clone https://github.com/flawada/$repo
 fi
 
 if ! [ -d "/tmp/$repo/blueprints/$OS" ]; then
