@@ -36,16 +36,15 @@ cd /tmp/$repo/blueprints/$OS
 blueprints=()
 i=0
 
-echo test2
 for blueprint in */; do
   blueprints+=("$blueprint")
   echo testq
   echo "$i) ${blueprint%/}"
-  echo test
+  echo testw
   i=$((i+1))
 done
 
-echo test
+echo testz
 
 read -p "select blueprint: " item
 
