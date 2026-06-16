@@ -44,8 +44,6 @@ for blueprint in */; do
   i=$((i+1))
 done
 
-echo test-z
-
 read -p "select blueprint: " item
 
 #clear

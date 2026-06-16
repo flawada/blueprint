@@ -10,9 +10,7 @@ xdg-user-dirs-update
 cp -r /tmp/config/blueprints/fedora/mangowm-fedora/config/* ~/.config/
 curl -Lso ~/.config/mango/wallpaper.png https://w.wallhaven.cc/full/xe/wallhaven-xe7ylv.png
 
+sudo chsh -s /usr/bin/fish
 curl -sS https://starship.rs/install.sh | sh -s -- -y
-chsh -s /usr/bin/fish
-echo "set -g fish_greeting" >> ~/.config/fish/config.fish
-echo "starship init fish | source" >> ~/.config/fish/config.fish
 
 mango
