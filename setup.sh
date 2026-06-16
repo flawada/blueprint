@@ -2,7 +2,7 @@
 
 clear
 
-set -e
+#set -e
 repo="config"
 
 if [ "$(uname)" != "Linux" ]; then
