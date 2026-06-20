@@ -4,24 +4,33 @@ set -e
 
 # colors
 RED='\033[0;31m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
 repo='config'
 
-OS=$(grep -Po '(?<=^ID=).*' /etc/os-release | tr -d '"')
+if [ -f /etc/os-release ]; then
+    source /etc/os-release
+else
+    printf "%bError: /etc/os-release does not exist. %b\n" "$RED" "$NC"
+    exit 1
+fi
 
-case '$OS' in
+
+### change to automatic update
+case "$ID" in
   fedora)
     printf "%bFedora%b\n" "$GREEN" "$NC"
     ;;
   *)
-    printf "%bError%b\n" "$RED" "$NC"
+    printf "%bError: non supported linux distribution. %b\n" "$RED" "$NC"
     exit 1
     ;;
 esac
 
-cd /tmp
+echo <(curl "https://raw.githubusercontent.com/flawada/blueprint/main/blueprints/$ID/options.txt")
 
 
 
@@ -34,6 +43,7 @@ cd /tmp
 
 #### deprecated ####
 
+#cd /tmp
 #sudo dnf in -y git
 #
 #if ! [ -d "/tmp/$repo" ]; then
