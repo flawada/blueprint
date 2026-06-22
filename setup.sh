@@ -39,7 +39,7 @@ select blueprint in "${blueprints[@]}"; do
 done
 
 
-curl -s https://raw.githubusercontent.com/flawada/blueprint/main/blueprints/$ID/$blueprint/files.tar
+curl -sL https://raw.githubusercontent.com/flawada/blueprint/main/blueprints/$ID/$blueprint/files.tar | tar -xf - -C /tmp
 
 
 exit 1
