@@ -14,6 +14,7 @@ Currently only works for fedora (fedora everything).
 <details> 
   <summary>Fedora everything guide</summary>
 
+
   Software selection:
   - Base Environment -> Fedora Custom Operating System
   - Additional software for Selected Environment -> If you are on a VM: Guest Agents; If you use Wifi: Common Networkmanager Submodules
