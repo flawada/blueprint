@@ -1,15 +1,23 @@
 #!/bin/bash
 
+git=0
+
 set -euo pipefail
 
 if ! rpm -q terra-release &>/dev/null; then
-sudo dnf install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release -y
+  sudo dnf in -y --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
 fi
+
 sudo dnf copr enable -y leloubil/wl-clip-persist
 sudo dnf copr enable -y sneexy/zen-browser
 
-sudo dnf in -y mangowm ghostty thunar zen-browser waybar mako wlsunset swaybg wl-clip-persist cliphist gtklock playerctl rofi wlogout blueman-manager pavucontrol nm-connection-editor xdg-desktop-portal xdg-desktop-portal-wlr xorg-x11-server-Xwayland xfce-polkit gedit nwg-look xdg-user-dirs zsh eza git
+sudo dnf in -y mangowm ghostty thunar zen-browser waybar mako wlsunset swaybg wl-clip-persist cliphist gtklock playerctl rofi wlogout blueman-manager pavucontrol nm-connection-editor xdg-desktop-portal xdg-desktop-portal-wlr xorg-x11-server-Xwayland xfce-polkit gedit nwg-look xdg-user-dirs zsh eza
 # engrampa
+
+if ! rpm -q git &>/dev/null; then
+  sudo dnf in -y git
+  git=1
+fi
 
 xdg-user-dirs-update
 
@@ -25,6 +33,10 @@ if [ ! -d "$HOME/.zsh/zsh-syntax-highlighting" ]; then
 fi
 curl -sS https://starship.rs/install.sh | sh -s -- -y
 curl -Lso "$HOME/.config/mango/wallpaper.png" https://w.wallhaven.cc/full/xe/wallhaven-xe7ylv.png
+
+if [[ $git -eq 1 ]]; then
+  sudo dnf rm -y git
+fi
 
 clear
 
