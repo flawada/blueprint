@@ -22,7 +22,7 @@
 
 /*
   "custom/menu": {
-    "format-icons": ["<span color='#a094b3'font='17.5'>⛶ </span>"],
+    "format-icons": ["<span color='#bbbbbb'font='17.5'>⛶ </span>"],
     "format": "{icon}",
     "tooltip": false,
     "on-click": "rofi -config ~/.config/mango/rofi/config.rasi -show drun -show-icons"
@@ -30,7 +30,7 @@
 */
 
   "custom/power": {
-    "format-icons": ["<span color='#a094b3'></span>"],
+    "format-icons": ["<span color='#bbbbbb'></span>"],
     "format": "{icon}",
     "tooltip": false,
     "on-click": "wlogout"
@@ -44,15 +44,16 @@
   },
   "network": {
     // "max-length": 10,
-    "format-wifi": "{essid}  <span color='#a094b3'></span>",
+    "format-wifi": "{essid}  <span color='#bbbbbb'></span>",
     "format-ethernet": "{ipaddr}/{cidr}",
     "tooltip-format": "{ifname} via {gwaddr}",
     "format-linked": "{ifname} (No IP)",
     "format-disconnected": "Disconnected ⚠",
-    "on-click": "ghostty --class=nmtui -e nmtui"
+    "on-click": "ghostty --title=nmtui -e nmtui"
     // "format-alt": "{ifname}: {ipaddr}/{cidr}",
   },
   "clock": {
+    "on-click-right": "waypaper",
     "format": "{:%b %d - %H:%M}",
     "tooltip-format": "<span size='11pt' font='Geist Mono'>{calendar}</span>",
     "calendar": {
@@ -60,27 +61,27 @@
         "mode-mon-col": 4,
         "on-scroll" : 1,
         "format": {
-            "today": "<span color='#3d3555' background='#a5c5a5'><b>{}</b></span>"
+            "today": "<span color='#3d3555' background='#bbbbbb'><b>{}</b></span>"
         }
     },
     "actions": {
-        "on-click-right": "mode",
+        "on-click": "mode",
         "on-scroll-up": "shift_down",
         "on-scroll-down": "shift_up"
     }
   },
   "bluetooth": {
-    "format": "<span color='#a094b3'></span>",
-    "format-disabled": "<span color='#a094b3'>󰂲</span>",
+    "format": "<span color='#bbbbbb'></span>",
+    "format-disabled": "<span color='#bbbbbb'>󰂲</span>",
     "tooltip": false,
     "on-click": "blueman-manager"
   },
   "wireplumber": {
-    "format": "{volume}% <span color='#a094b3'>{icon}</span>",
+    "format": "{volume}% <span color='#bbbbbb'>{icon}</span>",
     "format-icons": {
       "default": ["", "", ""]
     },
-    "format-muted": "<span color='#a094b3'></span>",
+    "format-muted": "<span color='#bbbbbb'></span>",
     "on-click": "pavucontrol"
   },
   "battery": {

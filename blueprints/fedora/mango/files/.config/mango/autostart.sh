@@ -32,7 +32,7 @@ wl-paste --type text --watch cliphist store &
 
 # polkit (auth) / needs update
 if ! pgrep -x "xfce-polkit" >/dev/null; then
-  /usr/lib/xfce-polkit/xfce-polkit &
+  /usr/libexec/xdg-desktop-portal & /usr/libexec/xdg-desktop-portal-gtk &
 fi
 
 # autostart apps
