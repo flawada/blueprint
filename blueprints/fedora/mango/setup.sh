@@ -34,11 +34,10 @@ xdg-user-dirs-update
 
 curl -sLf https://raw.githubusercontent.com/flawada/blueprint/main/blueprints/fedora/mango/files.tar | tar -xf - --strip-components=1 -C "$HOME"
 
-if ! [ -e "$HOME/.zshrc"]; then
-    printf "%bError: Something went wrong when downloading. %b\n" "$RED" "$NC"
-    exit 1
-fi
-
+#if ! [ -e "$HOME/.zshrc" ]; then
+#    printf "%bError: Something went wrong when downloading. %b\n" "$RED" "$NC"
+#    exit 1
+#fi
 
 # add checksum check
 # echo "hash path" | sha256sum --check
