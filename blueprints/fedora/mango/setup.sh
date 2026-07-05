@@ -42,8 +42,6 @@ curl -sLf https://raw.githubusercontent.com/flawada/blueprint/main/blueprints/fe
 # add checksum check
 # echo "hash path" | sha256sum --check
 
-cp -r /tmp/files/home/. "$HOME"
-
 sudo chsh -s "$(which zsh)" "$USER"
 printf '[Service]\nExecStart=\nExecStart=-/usr/sbin/agetty --autologin %s --noclear %%I $TERM\n' "$USER" | sudo systemctl edit getty@tty1 --stdin
 if [ ! -d "$HOME/.zsh/zsh-autosuggestions" ]; then
