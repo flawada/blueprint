@@ -1,14 +1,7 @@
-# my configs put together
-
-In work and mainly for myself.
-
+# In work and mainly for myself.
 
 
 Currently only works for fedora (fedora everything).
-
-
-
-
 
 
 <details> 
