@@ -56,7 +56,7 @@ git clone --depth 1 https://github.com/vinceliuice/Graphite-gtk-theme
 ./Graphite-gtk-theme/install.sh -c dark
 rm -rf Graphite-gtk-theme
 
-curl -Lso "$HOME/.config/mango/wallpaper.png" https://w.wallhaven.cc/full/xe/wallhaven-xe7ylv.png
+curl -Lso "$HOME/.config/mango/wallpaper.png" https://w.wallhaven.cc/full/5y/wallhaven-5yr153.png
 
 if [[ $git -eq 1 ]]; then
   sudo dnf rm -y git
