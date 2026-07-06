@@ -83,9 +83,9 @@ if lspci | grep -iq nvidia; then
         sudo dnf install -y  gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs xorg-x11-drv-nvidia-libs.i686
         printf "Compiling driver modules. This might take a while.."
         while ps aux | grep -v grep | grep -qE "akmods|akmodsbuild"; do
-    	  printf "."
-    	  sleep 5
-  	done
+    	    printf "."
+    	    sleep 5
+  	    done
         if sudo akmods; then
           printf "Done."
         else
