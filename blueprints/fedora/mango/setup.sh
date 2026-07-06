@@ -72,7 +72,7 @@ fi
 
 clear
 
-if lsmod | grep -q nouveau; then
+if lspci | grep -iq nvidia; then
   printf "Nvidia hardware detected. Install rpmfusion?\nNote: This will install modern drivers. Dont use if you have a legacy card.\n"
   while true; do
     read -rn 1 -p "(y/n): " yn
@@ -81,15 +81,17 @@ if lsmod | grep -q nouveau; then
       [Yy]* )
         sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
         sudo dnf install -y  gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs xorg-x11-drv-nvidia-libs.i686
-        printf "Compiling driver modules. This might take a while"
-        if sudo akmods | grep -q OK; then
-          printf "Something went wrong. 5 min sleep to insure installation."
-          sleep 300
+        printf "Compiling driver modules. This might take a while.."
+        while ps aux | grep -v grep | grep -qE "akmods|akmodsbuild"; do
+    	  printf "."
+    	  sleep 5
+  	done
+        if sudo akmods; then
+          printf "Done."
+        else
+          printf "Something went wrong. Waiting 3m to to insure installation"
+          sleep 180
         fi
-        while ! sudo akmods | grep -q OK; do
-          printf "."
-          sleep 10
-        done
         printf "\n"
         break;;
       [Nn]* ) break;;
