@@ -11,7 +11,7 @@ fi
 sudo dnf copr enable -y leloubil/wl-clip-persist
 sudo dnf copr enable -y sneexy/zen-browser
 
-sudo dnf in -y mangowm ghostty thunar thunar-archive-plugin file-roller loupe zen-browser waybar mako wlsunset swaybg wl-clip-persist cliphist gtklock playerctl rofi wlogout blueman-manager pavucontrol nmtui xdg-desktop-portal xdg-desktop-portal-wlr xorg-x11-server-Xwayland xfce-polkit gedit nwg-look xdg-user-dirs zsh eza
+sudo dnf in -y mangowm ghostty thunar thunar-archive-plugin file-roller loupe zen-browser waybar mako wlsunset swaybg wl-clip-persist cliphist gtklock playerctl rofi wlogout blueman-manager pavucontrol nmtui xdg-desktop-portal xdg-desktop-portal-wlr xorg-x11-server-Xwayland xfce-polkit gedit xdg-user-dirs zsh eza
 # engrampa
 
 if ! rpm -q git &>/dev/null; then

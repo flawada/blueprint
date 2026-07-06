@@ -8,6 +8,14 @@ export XDG_CURRENT_DESKTOP=wlroots
 #lock
 gtklock -b ~/.config/mango/wallpaper.png &
 
+# theme
+gsettings set org.gnome.desktop.interface gtk-theme 'Graphite-Dark'
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+#gsettings set org.gnome.desktop.interface cursor-theme ''
+#gsettings set org.gnome.desktop.interface icon-theme ''
+#gsettings set org.gnome.desktop.interface font-name ''
+
+
 # fast launch on GTK/Qt apps
 fc-cache -f &
 gtk-update-icon-cache -q &
