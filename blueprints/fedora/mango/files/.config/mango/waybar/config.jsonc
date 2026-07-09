@@ -19,18 +19,12 @@
     "on-scroll-up": "playerctl position 5+",
     "on-scroll-down": "playerctl position 5-"
   },
-
-  "custom/menu": {
-    "format-icons": ["<span color='#bbbbbb'font='17.5'>⛶</span>"],
-    "format": "{icon}",
-    "tooltip": false,
-    "on-click": "rofi -config ~/.config/mango/rofi/config.rasi -show drun -show-icons"
-  },
   "custom/power": {
     "format-icons": ["<span color='#bbbbbb'></span>"],
     "format": "{icon}",
     "tooltip": false,
-    "on-click": "wlogout -l ~/.config/mango/wlogout/layout -C ~/.config/mango/wlogout/style.css -m 300"
+    "on-click": "wlogout -l ~/.config/mango/wlogout/layout -C ~/.config/mango/wlogout/style.css -m 400",
+    "on-click-right": "waypaper"
   },
   "ext/workspaces": {
     "disable-scroll": true,
@@ -50,7 +44,7 @@
     // "format-alt": "{ifname}: {ipaddr}/{cidr}",
   },
   "clock": {
-    "on-click-right": "waypaper",
+    "on-click-right": "rofi -config ~/.config/mango/rofi/config.rasi -show drun -show-icons",
     "format": "{:%b %d - %H:%M}",
     "tooltip-format": "<span size='11pt' font='Geist Mono'>{calendar}</span>",
     "calendar": {

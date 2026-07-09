@@ -1,38 +1,58 @@
 #!/bin/bash
 
-git=0
-
 set -euo pipefail
+
+# colors
+RED='\033[0;31m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;94m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+clear
+
+printf "$(cat << EOF
+${BLUE}                                                          
+██ ▄▄  ▄▄ ▄▄▄▄▄▄ ▄▄▄▄ ▄▄▄▄▄▄ ▄▄▄  ▄▄    ▄▄     ▄▄▄ ▄▄▄▄▄▄ ▄▄  ▄▄▄  ▄▄  ▄▄ 
+██ ███▄██   ██  ███▄▄   ██  ██▀██ ██    ██    ██▀██  ██   ██ ██▀██ ███▄██ 
+██ ██ ▀██   ██  ▄▄██▀   ██  ██▀██ ██▄▄▄ ██▄▄▄ ██▀██  ██   ██ ▀███▀ ██ ▀██ 
+${NC}
+EOF
+)"
+
+printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+printf "%bInstalling terra repository..%b\n" "$BLUE" "$NC"
 
 if ! rpm -q terra-release &>/dev/null; then
   sudo dnf in -y --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
 fi
 
+printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+printf "%bInstalling copr-repositorys..%b\n" "$BLUE" "$NC"
 sudo dnf copr enable -y leloubil/wl-clip-persist
 sudo dnf copr enable -y sneexy/zen-browser
 
-sudo dnf in -y mangowm ghostty thunar thunar-archive-plugin file-roller loupe zen-browser waybar mako wlsunset swaybg wl-clip-persist cliphist gtklock playerctl rofi wlogout blueman-manager pavucontrol nmtui xdg-desktop-portal xdg-desktop-portal-wlr xorg-x11-server-Xwayland xfce-polkit gedit xdg-user-dirs zsh eza
-# engrampa
-
-if ! rpm -q git &>/dev/null; then
-  sudo dnf in -y git
-  git=1
-fi
-
-if ! rpm -q tar &>/dev/null; then
-  sudo dnf in -y tar
-  tar=1
-fi
-
-if ! rpm -q sassc &>/dev/null; then
-  sudo dnf in -y sassc
-  sassc=1
-fi
-
+printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+printf "%bInstalling mangowm..%b\n" "$BLUE" "$NC"
+sudo dnf in -y mangowm
+printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+printf "%bInstalling system-basics..%b\n" "$BLUE" "$NC"
+sudo dnf in -y xdg-desktop-portal xdg-desktop-portal-wlr xorg-x11-server-Xwayland xfce-polkit zsh
+printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+printf "%bInstalling requirements..%b\n" "$BLUE" "$NC"
+sudo dnf in -y mako waybar wlogout blueman-manager pavucontrol nmtui playerctl wlsunset swaybg gtklock rofi wl-clip-persist cliphist eza tar git
+printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+printf "%bInstalling core Apps..%b\n" "$BLUE" "$NC"
+sudo dnf in -y zen-browser ghostty loupe gedit thunar thunar-archive-plugin file-roller xdg-user-dirs
+printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+printf "%bUpdating user directories..%b\n" "$BLUE" "$NC"
 xdg-user-dirs-update
+printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+printf "%bInstalling setup requirements..%b\n" "$BLUE" "$NC"
 
-
-curl -sLf https://raw.githubusercontent.com/flawada/blueprint/main/blueprints/fedora/mango/files.tar | tar -xf - --strip-components=1 -C "$HOME"
+printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+printf "%bDownloading config files..%b\n" "$BLUE" "$NC"
+curl -Lf https://raw.githubusercontent.com/flawada/blueprint/main/blueprints/fedora/mango/files.tar | tar -xf - --strip-components=1 -C "$HOME"
 
 #if ! [ -e "$HOME/.zshrc" ]; then
 #    printf "%bError: Something went wrong when downloading. %b\n" "$RED" "$NC"
@@ -42,37 +62,49 @@ curl -sLf https://raw.githubusercontent.com/flawada/blueprint/main/blueprints/fe
 # add checksum check
 # echo "hash path" | sha256sum --check
 
+printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+printf "%bEnabling zsh..%b\n" "$BLUE" "$NC"
 sudo chsh -s "$(which zsh)" "$USER"
+printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+printf "%bEnabling autologin..%b\n" "$BLUE" "$NC"
 printf '[Service]\nExecStart=\nExecStart=-/usr/sbin/agetty --autologin %s --noclear %%I $TERM\n' "$USER" | sudo systemctl edit getty@tty1 --stdin
+
+printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+printf "%bDownloading zsh plugins..%b\n" "$BLUE" "$NC"
 if [ ! -d "$HOME/.zsh/zsh-autosuggestions" ]; then
   git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions "$HOME/.zsh/zsh-autosuggestions"
 fi
 if [ ! -d "$HOME/.zsh/zsh-syntax-highlighting" ]; then
   git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting "$HOME/.zsh/zsh-syntax-highlighting"
 fi
+
+printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+printf "%bDownloading starship..%b\n" "$BLUE" "$NC"
 curl -sS https://starship.rs/install.sh | sh -s -- -y
 
+printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+printf "%bDownloading Graphite-gtk-theme..%b\n" "$BLUE" "$NC"
+sassc=0
+if ! rpm -q sassc &>/dev/null; then
+  sudo dnf in -y sassc
+  sassc=1
+fi
+
 git clone --depth 1 https://github.com/vinceliuice/Graphite-gtk-theme
-./Graphite-gtk-theme/install.sh -c dark
+cd Graphite-gtk-theme
+./install.sh -c dark
+cd ..
 rm -rf Graphite-gtk-theme
-
-curl -Lso "$HOME/.config/mango/wallpaper.png" https://w.wallhaven.cc/full/5y/wallhaven-5yr153.png
-
-if [[ $git -eq 1 ]]; then
-  sudo dnf rm -y git
-fi
-
-if [[ $tar -eq 1 ]]; then
-  sudo dnf rm -y tar
-fi
 
 if [[ $sassc -eq 1 ]]; then
   sudo dnf rm -y sassc
 fi
-
-clear
+printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+printf "%bDownloading basic Wallpaper..%b\n" "$BLUE" "$NC"
+curl -Lfo "$HOME/.config/mango/wallpaper.png" https://w.wallhaven.cc/full/5y/wallhaven-5yr153.png
 
 if lspci | grep -iq nvidia; then
+  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
   printf "Nvidia hardware detected. Install rpmfusion?\nNote: This will install modern drivers. Dont use if you have a legacy card.\n"
   while true; do
     read -rn 1 -p "(y/n): " yn
@@ -82,6 +114,7 @@ if lspci | grep -iq nvidia; then
         sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
         sudo dnf install -y  gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs xorg-x11-drv-nvidia-libs.i686
         printf "Compiling driver modules. This might take a while.."
+        sleep 10
         while ps aux | grep -v grep | grep -qE "akmods|akmodsbuild"; do
     	    printf "."
     	    sleep 5
@@ -98,9 +131,13 @@ if lspci | grep -iq nvidia; then
       * ) printf "Invalid\n";;
     esac
   done
-  clear
+  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
 fi
 
-printf "rebooting in 10s..\n"
+printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+
+clear
+
+printf "%bDone. Rebooting in 10s..%b\n" "$GREEN" "$NC"
 sleep 10
 sudo reboot

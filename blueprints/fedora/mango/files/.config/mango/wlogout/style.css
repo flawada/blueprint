@@ -4,12 +4,13 @@
 }
 
 window {
-	background-color: rgba(12, 12, 12, 0.9);
+	background-color: rgba(0, 0, 0, 0.5);
 }
 
 button {
-    border-radius: 8px;
-    border-color: black;
+    border-radius: 10px;
+    border-color: #1E1E1E;
+    margin: 3px;
 	text-decoration-color: #FFFFFF;
     color: #FFFFFF;
 	background-color: #1E1E1E;
@@ -20,7 +21,7 @@ button {
 	background-size: 20%;
 }
 
-button:active, button:hover {
+button:active, button:focus, button:hover {
 	background-color: #212121;
 	outline-style: none;
 }

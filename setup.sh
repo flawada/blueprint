@@ -64,8 +64,8 @@ fi
 
 printf "%bConfig selected%b\n" "$GREEN" "$NC"
 printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-printf "%bRunning script..%b\n" "$BLUE" "$NC"
+printf "%bRedirecting..%b\n" "$BLUE" "$NC"
 
 if sudo -v; then
-    bash <(curl -sLf https://raw.githubusercontent.com/flawada/blueprint/main/blueprints/$ID/$blueprint/setup.sh)
+    bash <(curl -Lf https://raw.githubusercontent.com/flawada/blueprint/main/blueprints/$ID/$blueprint/setup.sh)
 fi

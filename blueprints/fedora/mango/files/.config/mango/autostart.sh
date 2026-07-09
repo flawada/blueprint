@@ -16,9 +16,6 @@ gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 fc-cache -f &
 gtk-update-icon-cache -q &
 
-# notifications daemon
-mako --default-timeout 10000 &
-
 # night light
 wlsunset -T 3501 -t 3500 &
 
@@ -28,13 +25,16 @@ swaybg -i ~/.config/mango/wallpaper.png &
 # bar
 waybar -c ~/.config/mango/waybar/config.jsonc -s ~/.config/mango/waybar/style.css &
 
+# notifications daemon
+mako --default-timeout 10000 &
+
 # keep clipboard content
 wl-clip-persist --clipboard regular --reconnect-tries 0 &
 
 # clipboard content manager
 wl-paste --type text --watch cliphist store &
 
-# polkit (auth) / needs update
+# polkit (auth)
 if ! pgrep -x "xfce-polkit" >/dev/null; then
   /usr/libexec/xdg-desktop-portal & /usr/libexec/xdg-desktop-portal-gtk &
 fi
