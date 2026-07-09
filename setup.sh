@@ -32,7 +32,7 @@ else
     exit 1
 fi
 
-OS=($(curl -s "https://api.github.com/repos/flawada/config/contents/blueprints" | grep "name" | cut -d '"' -f 4))
+OS=($(curl -s "https://api.github.com/repos/flawada/blueprint/contents/blueprints" | grep "name" | cut -d '"' -f 4))
 
 if [[ "${OS[*]}" == *"$ID"* ]]; then
     printf "%bSystem: %s | supported%b\n" "$GREEN" "$PRETTY_NAME" "$NC"
@@ -41,18 +41,18 @@ else
     exit 1
 fi
 
-blueprints=($(curl -s "https://api.github.com/repos/flawada/config/contents/blueprints/$ID" | grep "name" | cut -d '"' -f 4))
+blueprints=($(curl -s "https://api.github.com/repos/flawada/blueprint/contents/blueprints/$ID" | grep "name" | cut -d '"' -f 4))
 
 printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
 
 if [ "${#blueprints[@]}" -eq 0 ]; then
-    printf "%bError: No config found. %b\n" "$RED" "$NC"
+    printf "%bError: No blueprint found. %b\n" "$RED" "$NC"
     exit 1
 elif [ "${#blueprints[@]}" -eq 1 ]; then
     blueprint="${blueprints[0]}"
-    printf "%bFound %s config..%b\n" "$BLUE" "$blueprint" "$NC"
+    printf "%bFound %s blueprint..%b\n" "$BLUE" "$blueprint" "$NC"
 else
-    printf "%bSelect a config:%b\n" "$BLUE" "$NC"
+    printf "%bSelect a blueprint:%b\n" "$BLUE" "$NC"
     select blueprint in "${blueprints[@]}"; do
         if [ -n "$blueprint" ]; then
             break
@@ -62,7 +62,7 @@ else
     done
 fi
 
-printf "%bConfig selected%b\n" "$GREEN" "$NC"
+printf "%bBlueprint selected%b\n" "$GREEN" "$NC"
 printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
 printf "%bRedirecting..%b\n" "$BLUE" "$NC"
 
