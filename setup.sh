@@ -67,5 +67,5 @@ printf "\n━━━━━━━━━━━━━━━━━━━━━━━�
 printf "%bRedirecting..%b\n" "$BLUE" "$NC"
 
 if sudo -v; then
-    bash <(curl -Lf https://raw.githubusercontent.com/flawada/blueprint/main/blueprints/$ID/$blueprint/setup.sh)
+    bash <(curl -Lfs https://raw.githubusercontent.com/flawada/blueprint/main/blueprints/$ID/$blueprint/setup.sh)
 fi
