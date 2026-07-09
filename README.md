@@ -16,6 +16,8 @@ Currently only works for fedora (fedora everything).
   
 </details>
 
+# bash script
+
 ```bash
 bash <(curl "https://raw.githubusercontent.com/flawada/blueprint/main/setup.sh")
 ```
