@@ -2,7 +2,6 @@
 
 Currently only works for fedora (fedora everything).
 
-
 <details> 
   <summary>Fedora everything guide</summary>
 
