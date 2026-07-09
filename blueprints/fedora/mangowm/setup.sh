@@ -103,7 +103,7 @@ curl -Lfo "$HOME/.config/mango/wallpaper.png" https://w.wallhaven.cc/full/5y/wal
 
 if lspci | grep -iq nvidia; then
   printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-  printf "Nvidia hardware detected. Install rpmfusion?\nNote: This will install modern drivers. Dont use if you have a legacy card.\n"
+  printf "%bNvidia hardware detected. Install rpmfusion?\nNote: This will install modern drivers. Dont use if you have a legacy card.%b\n" "$BLUE" "$NC"
   while true; do
     read -rn 1 -p "(y/n): " yn
     printf "\n"
@@ -111,22 +111,21 @@ if lspci | grep -iq nvidia; then
       [Yy]* )
         sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
         sudo dnf install -y  gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs xorg-x11-drv-nvidia-libs.i686
-        printf "Compiling driver modules. This might take a while.."
+        printf "%bCompiling driver modules. This might take a while..%b" "$BLUE" "$NC"
         sleep 10
         while ps aux | grep -v grep | grep -qE "akmods|akmodsbuild"; do
-    	    printf "."
+    	    printf "%b.%b" "$BLUE" "$NC"
     	    sleep 5
   	    done
         printf "\n"
-        if sudo akmods; then
-          printf "Done.\n"
-        else
-          printf "Something went wrong when checking if its compiling. Waiting 3 minutes.\n"
+        if ! sudo akmods; then
+          printf "%bSomething went wrong when checking if its compiling. Waiting 3 minutes.%b\n" "$YELLOW" "$NC"
           sleep 180
         fi
+        printf "%bDone.%b\n" "$GREEN" "$NC"
         break;;
       [Nn]* ) break;;
-      * ) printf "Invalid\n";;
+      * ) printf "%bInvalid.%b\n" "$YELLOW" "$NC";;
     esac
   done
   printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
