@@ -52,7 +52,7 @@ printf "%bInstalling setup requirements..%b\n" "$BLUE" "$NC"
 
 printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
 printf "%bDownloading config files..%b\n" "$BLUE" "$NC"
-curl -Lf https://raw.githubusercontent.com/flawada/blueprint/main/blueprints/fedora/mango/files.tar | tar -xf - --strip-components=1 -C "$HOME"
+curl -Lf https://raw.githubusercontent.com/flawada/blueprint/main/blueprints/fedora/mangowm/files.tar | tar -xf - --strip-components=1 -C "$HOME"
 
 #if ! [ -e "$HOME/.zshrc" ]; then
 #    printf "%bError: Something went wrong when downloading. %b\n" "$RED" "$NC"
