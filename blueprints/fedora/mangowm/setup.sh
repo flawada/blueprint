@@ -60,11 +60,6 @@ printf "%bDownloading dotfiles..%b\n" "$BLUE" "$NC"
 curl -Lf https://raw.githubusercontent.com/flawada/blueprint/main/blueprints/fedora/mangowm/files.tar | tar -xf - --strip-components=1 -C "$HOME"
 printf "%bDownloaded dotfiles%b\n" "$GREEN" "$NC"
 
-#if ! [ -e "$HOME/.zshrc" ]; then
-#    printf "%bError: Something went wrong when downloading. %b\n" "$RED" "$NC"
-#    exit 1
-#fi
-
 # add checksum check
 # echo "hash path" | sha256sum --check
 
