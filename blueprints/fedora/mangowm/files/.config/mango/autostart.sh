@@ -26,7 +26,7 @@ swaybg -i ~/.config/mango/wallpaper.png &
 waybar -c ~/.config/mango/waybar/config.jsonc -s ~/.config/mango/waybar/style.css &
 
 # notifications daemon
-mako --default-timeout 10000 &
+mako -c ~/.config/mango/mako/config &
 
 # keep clipboard content
 wl-clip-persist --clipboard regular --reconnect-tries 0 &
