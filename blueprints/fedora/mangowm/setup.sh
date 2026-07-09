@@ -20,10 +20,9 @@ ${NC}
 EOF
 )"
 
-printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-printf "%bInstalling terra repository..%b\n" "$BLUE" "$NC"
-
 if ! rpm -q terra-release &>/dev/null; then
+  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+  printf "%bInstalling terra repository..%b\n" "$BLUE" "$NC"
   sudo dnf in -y --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
 fi
 
