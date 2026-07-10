@@ -1,9 +1,18 @@
 #! /bin/bash
 
 export XDG_CURRENT_DESKTOP=wlroots
+export XDG_SESSION_TYPE=wayland
 
 # lock
 gtklock -b ~/.config/mango/wallpaper.png -T 60 &
+
+# polkit (auth)
+if ! pgrep -x "xfce-polkit" >/dev/null; then
+  /usr/libexec/xfce-polkit &
+fi
+
+#/usr/libexec/xdg-desktop-portal &
+#/usr/libexec/xdg-desktop-portal-gtk &
 
 # theme
 gsettings set org.gnome.desktop.interface gtk-theme 'Graphite-Dark'
@@ -33,11 +42,6 @@ wl-clip-persist --clipboard regular --reconnect-tries 0 &
 
 # clipboard content manager
 wl-paste --type text --watch cliphist store &
-
-# polkit (auth)
-if ! pgrep -x "xfce-polkit" >/dev/null; then
-  /usr/libexec/xdg-desktop-portal & /usr/libexec/xdg-desktop-portal-gtk &
-fi
 
 # autostart apps
 #ghostty -e nvim &
