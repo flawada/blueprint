@@ -3,7 +3,7 @@
 }
 
 window#waybar {
-    background: rgba(28, 28, 28, 1);
+    background: rgba(34, 34, 34, 1);
     color: rgb(205, 214, 244);
 }
 
@@ -16,7 +16,7 @@ window#waybar > box.horizontal:dir(ltr) {
 
 #workspaces button.focused,
 #workspaces button.active {
-    color: rgb(30, 30, 46);
+    color: rgb(30, 30, 30);
     background: rgba(255, 255, 255, 0.5);
     padding: 0 16px;
 }
@@ -31,11 +31,15 @@ window#waybar > box.horizontal:dir(ltr) {
 }
 
 tooltip {
-    border: 1px solid #FFFFFF;
-    background: #000000;
+    background: transparent;
 }
+
 tooltip label {
+    border: 3px solid #777777;
+    background: #222222;
     padding: 10px;
+    border-radius: 7px;
+    margin-bottom: 2px;
 }
 
 #workspaces button,
@@ -63,5 +67,5 @@ label#battery,
 label#cpu,
 label#memory,
 label#mpris {
-  background:rgba(255, 255, 255, 0.05);
+  background:rgba(255, 255, 255, 0.1);
 }

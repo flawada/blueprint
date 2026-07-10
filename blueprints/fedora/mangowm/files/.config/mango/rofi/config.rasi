@@ -10,7 +10,7 @@ configuration {
     display-window: "";
 }
 
-@theme "colors"
+@theme "style"
 
 * {
     font: "Iosevka Nerd Font 12";
@@ -25,7 +25,6 @@ configuration {
 
 window {
     location:       south;
-    y-offset: 2;
     width:          480;
     border-radius:  16px 16px 0px 0px;
 
