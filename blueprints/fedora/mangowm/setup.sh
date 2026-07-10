@@ -21,7 +21,7 @@ EOF
 )"
 
 printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-printf "%bupdating system..%b\n" "$BLUE" "$NC"
+printf "%bUpdating system..%b\n" "$BLUE" "$NC"
 sudo dnf update --refresh -y
 printf "%bUpdated system%b\n" "$GREEN" "$NC"
 
@@ -149,7 +149,7 @@ if grep -q "0x10de" /sys/bus/pci/devices/*/vendor && ! rpm -q akmods; then
       [Yy]* )
         sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
         sudo dnf install -y  gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs xorg-x11-drv-nvidia-libs.i686
-        printf "%bCompiling driver modules..%b\n" "$BLUE" "$NC"
+        printf "%bCompiling driver modules.. Do not power off your machine. This can take up to 5 minutes.%b\n" "$BLUE" "$NC"
         sleep 10
         if ! sudo akmods; then
           printf "%bSomething went wrong when checking if its compiling. Waiting 3 minutes.%b\n" "$YELLOW" "$NC"
