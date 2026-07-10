@@ -27,14 +27,14 @@ if ! rpm -q terra-release &>/dev/null; then
   printf "%bInstalled terra repository%b\n" "$GREEN" "$NC"
 fi
 
-if ! [[ -f "/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:leloubil:wl-clip-persist.repo" && -f "/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:bgstack15/librewolf.repo" ]];then
+if ! [[ -f "/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:leloubil:wl-clip-persist.repo" && -f "/etc/yum.repos.d/librewolf.repo" ]];then
   printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
   printf "%bInstalling copr-repositories..%b\n" "$BLUE" "$NC"
   if ! [[ -f "/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:leloubil:wl-clip-persist.repo" ]];then
     sudo dnf copr enable -y leloubil/wl-clip-persist
   fi
-  if ! [[ -f "/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:bgstack15/librewolf.repo" ]];then
-    sudo dnf copr enable -y bgstack15/librewolf
+  if ! [[ -f "/etc/yum.repos.d/librewolf.repo" ]];then
+    sudo dnf config-manager addrepo --from-repofile=https://repo.librewolf.net/librewolf.repo
   fi
   printf "%bInstalled copr-repositories%b\n" "$GREEN" "$NC"
 fi
