@@ -39,7 +39,7 @@ fi
 
 printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
 
-printf "%bLoading blueprints%b\n" "$BLUE" "$NC"
+printf "%bLoading blueprints..%b\n" "$BLUE" "$NC"
 blueprints=($(curl -s "https://api.github.com/repos/flawada/blueprint/contents/blueprints/$ID" | grep "name" | cut -d '"' -f 4))
 if [ "${#blueprints[@]}" -eq 0 ]; then
     printf "%bError: No blueprint found. %b\n" "$RED" "$NC"
@@ -56,7 +56,7 @@ else
         fi
     done
 fi
-printf "%bBlueprint %s selected..%b\n" "$GREEN" "$blueprint" "$NC"
+printf "%bBlueprint %s selected%b\n" "$GREEN" "$blueprint" "$NC"
 
 printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
 
