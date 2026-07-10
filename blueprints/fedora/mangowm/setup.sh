@@ -71,7 +71,7 @@ printf "%bDownloaded dotfiles%b\n" "$GREEN" "$NC"
 # add checksum check
 # echo "hash path" | sha256sum --check
 
-if [[ "$SHELL" == *"zsh"* ]]; then
+if ! [[ "$SHELL" == *"zsh"* ]]; then
   printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
   printf "%bEnabling zsh..%b\n" "$BLUE" "$NC"
   sudo chsh -s "$(which zsh)" "$USER"
@@ -137,9 +137,9 @@ if ! [ -f "$HOME/.config/mango/wallpaper.png" ]; then
   printf "%bDownloaded wallpaper%b\n" "$GREEN" "$NC"
 fi
 
-if lspci | grep -iq nvidia && ! command -v akmods &> /dev/null; then
+if lsmod | grep -iq nouveau; then
   printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-  printf "%bNvidia hardware detected. Install rpmfusion?\nNote: This will install modern drivers. Dont use if you have a legacy card.%b\n" "$BLUE" "$NC"
+  printf "%bNouveau driver detected, used by nvidia drivers. Install rpmfusion?\nNote: This will install modern drivers. Dont use if you have a legacy card.%b\n" "$BLUE" "$NC"
   while true; do
     read -rn 1 -p "(y/n): " yn
     printf "\n"
