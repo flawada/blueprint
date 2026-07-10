@@ -7,3 +7,4 @@ keybind = ctrl+v=paste_from_clipboard
 window-padding-x = 12
 window-padding-y = 9
 custom-shader = shaders/cursor_warp.glsl
+custom-shader-animation = always
