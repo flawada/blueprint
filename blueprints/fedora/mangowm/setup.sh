@@ -21,7 +21,7 @@ EOF
 )"
 
 printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-  printf "%bupdating system..%b\n" "$BLUE" "$NC"
+printf "%bupdating system..%b\n" "$BLUE" "$NC"
 sudo dnf update --refresh -y
 printf "%bUpdated system%b\n" "$GREEN" "$NC"
 
