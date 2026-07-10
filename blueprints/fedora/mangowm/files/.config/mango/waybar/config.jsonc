@@ -44,7 +44,7 @@
     // "format-alt": "{ifname}: {ipaddr}/{cidr}",
   },
   "clock": {
-    "on-click-right": "rofi -config ~/.config/mango/rofi/config.rasi -show drun -show-icons",
+    "on-click": "rofi -config ~/.config/mango/rofi/config.rasi -show drun -show-icons",
     "format": "{:%b %d - %H:%M}",
     "tooltip-format": "<span size='11pt' font='Geist Mono'>{calendar}</span>",
     "calendar": {
@@ -58,7 +58,7 @@
         }
     },
     "actions": {
-        "on-click": "mode",
+        "on-click-right": "mode",
         "on-scroll-up": "shift_down",
         "on-scroll-down": "shift_up"
     }
