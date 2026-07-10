@@ -20,6 +20,11 @@ ${NC}
 EOF
 )"
 
+printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+  printf "%bupdating system..%b\n" "$BLUE" "$NC"
+sudo dnf update --refresh -y
+printf "%bUpdated system%b\n" "$GREEN" "$NC"
+
 if ! rpm -q terra-release &>/dev/null; then
   printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
   printf "%bInstalling terra repository..%b\n" "$BLUE" "$NC"
