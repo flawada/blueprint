@@ -16,7 +16,7 @@
   
 </details>
 
-# bash script
+## bash script
 
 ```bash
 bash <(curl "https://raw.githubusercontent.com/flawada/blueprint/main/setup.sh")
