@@ -136,7 +136,6 @@ if ! grep -q -- "--autologin $USER" /etc/systemd/system/getty@tty1.service.d/ove
   printf "%bEnabling autologin..%b\n" "$BLUE" "$NC"
   printf '[Service]\nExecStart=\nExecStart=-/usr/sbin/agetty --autologin %s --noclear %%I $TERM\n' "$USER" | sudo systemctl edit getty@tty1 --stdin
   sudo systemctl daemon-reload
-  sudo systemctl restart getty@tty1
   printf "%bEnabled autologin%b\n" "$GREEN" "$NC"
 fi
 
