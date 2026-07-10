@@ -149,7 +149,7 @@ if lsmod | grep -q "^nouveau"; then
         sudo dnf install -y  gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs xorg-x11-drv-nvidia-libs.i686
         printf "%bCompiling driver modules. This might take a while..%b" "$BLUE" "$NC"
         sleep 10
-        while ps aux | grep -v grep | grep -qE "akmods|akmodsbuild"; do
+        while ps aux | grep -qE "akmods|akmodsbuild"; do
     	    printf "%b.%b" "$BLUE" "$NC"
     	    sleep 5
   	    done
