@@ -140,7 +140,7 @@ if ! grep -q -- "--autologin $USER" /etc/systemd/system/getty@tty1.service.d/ove
   printf "%bEnabled autologin%b\n" "$GREEN" "$NC"
 fi
 
-if grep -q "^nouveau" <(lsmod); then
+if grep -qE "nvidia|nouveau" <(lsmod); then
   printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
   printf "%bNouveau detected, used by nvidia hardware. Install rpmfusion?\nNote: This will install modern drivers. Dont use if you have a legacy card.%b\n" "$BLUE" "$NC"
   while true; do
