@@ -2,6 +2,8 @@
 
 ## Currently only works for fedora (fedora everything).
 
+**[<kbd> <br> Install <br> </kbd>][Install]** 
+
 <details> 
   <summary>Fedora everything guide</summary>
 
