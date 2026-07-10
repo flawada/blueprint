@@ -27,14 +27,14 @@ if ! rpm -q terra-release &>/dev/null; then
   printf "%bInstalled terra repository%b\n" "$GREEN" "$NC"
 fi
 
-if ! [[ -f "/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:leloubil:wl-clip-persist.repo" && -f "/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:sneexy:zen-browser.repo" ]];then
+if ! [[ -f "/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:leloubil:wl-clip-persist.repo" && -f "/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:bgstack15/librewolf.repo" ]];then
   printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
   printf "%bInstalling copr-repositories..%b\n" "$BLUE" "$NC"
   if ! [[ -f "/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:leloubil:wl-clip-persist.repo" ]];then
     sudo dnf copr enable -y leloubil/wl-clip-persist
   fi
-  if ! [[ -f "/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:sneexy:zen-browser.repo" ]];then
-    sudo dnf copr enable -y sneexy/zen-browser
+  if ! [[ -f "/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:bgstack15/librewolf.repo" ]];then
+    sudo dnf copr enable -y bgstack15/librewolf
   fi
   printf "%bInstalled copr-repositories%b\n" "$GREEN" "$NC"
 fi
@@ -53,7 +53,7 @@ sudo dnf in -y mako waybar wlogout blueman-manager pavucontrol nmtui playerctl w
 printf "%bInstalled dotfile requirements%b\n" "$GREEN" "$NC"
 printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
 printf "%bInstalling core apps..%b\n" "$BLUE" "$NC"
-sudo dnf in -y zen-browser ghostty loupe gedit thunar thunar-archive-plugin file-roller xdg-user-dirs
+sudo dnf in -y librewolf ghostty loupe gedit thunar thunar-archive-plugin file-roller xdg-user-dirs
 printf "%bInstalled core apps%b\n" "$GREEN" "$NC"
 
 if ! [[ -f "$HOME/.config/user-dirs.dirs" ]]; then
