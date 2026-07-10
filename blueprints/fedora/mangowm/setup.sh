@@ -56,7 +56,7 @@ printf "%bInstalling core apps..%b\n" "$BLUE" "$NC"
 sudo dnf in -y zen-browser ghostty loupe gedit thunar thunar-archive-plugin file-roller xdg-user-dirs
 printf "%bInstalled core apps%b\n" "$GREEN" "$NC"
 
-if [[ ! -f "$HOME/.config/user-dirs.dirs" ]]; then
+if ! [[ -f "$HOME/.config/user-dirs.dirs" ]]; then
   printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
   printf "%bCreating user directories..%b\n" "$BLUE" "$NC"
   xdg-user-dirs-update
@@ -137,9 +137,9 @@ if ! [ -f "$HOME/.config/mango/wallpaper.png" ]; then
   printf "%bDownloaded wallpaper%b\n" "$GREEN" "$NC"
 fi
 
-if lsmod | grep -iq nouveau; then
+if lsmod | grep -q "^nouveau"; then
   printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-  printf "%bNouveau driver detected, used by nvidia drivers. Install rpmfusion?\nNote: This will install modern drivers. Dont use if you have a legacy card.%b\n" "$BLUE" "$NC"
+  printf "%bNouveau detected, used by nvidia hardware. Install rpmfusion?\nNote: This will install modern drivers. Dont use if you have a legacy card.%b\n" "$BLUE" "$NC"
   while true; do
     read -rn 1 -p "(y/n): " yn
     printf "\n"
