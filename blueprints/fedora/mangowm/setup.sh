@@ -170,6 +170,6 @@ if grep -q "^nouveau" <(lsmod); then
 fi
 
 clear
-printf "%bDone. logging out in 10s..%b\n" "$GREEN" "$NC"
+printf "%bDone. relogging in 10s..%b\n" "$GREEN" "$NC"
 sleep 10
-logout
+pkill -u $USER
