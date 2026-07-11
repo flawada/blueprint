@@ -2,12 +2,6 @@
 
 ## Currently only works for fedora (fedora everything).
 
-<div align="center">
-
-**[<kbd> <br> Test <br> </kbd>](./folder-name/README.md)**
-
-</div>
-
 <details> 
   <summary>Fedora everything guide</summary>
 
@@ -27,3 +21,20 @@
 ```bash
 bash <(curl "https://raw.githubusercontent.com/flawada/blueprint/main/setup.sh")
 ```
+
+## wip
+<div align="center">
+
+<br>
+
+---
+
+**[<kbd> <br> Fedora <br> </kbd>][Fedora]**
+
+---
+
+<br>
+
+</div>
+
+[Fedora]: ./blueprints/fedora/README.md
