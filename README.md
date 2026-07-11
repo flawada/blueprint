@@ -25,8 +25,6 @@ bash <(curl "https://raw.githubusercontent.com/flawada/blueprint/main/setup.sh")
 ## wip
 <div align="center">
 
-<br>
-
 **[<kbd> Fedora </kbd>][Fedora]**
 
 </div>
