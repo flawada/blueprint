@@ -2,6 +2,12 @@
 
 ## Currently only works for fedora (fedora everything).
 
+<div align="center">
+
+**[<kbd> <br> Test <br> </kbd>](./folder-name/README.md)**
+
+</div>
+
 <details> 
   <summary>Fedora everything guide</summary>
 
