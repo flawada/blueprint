@@ -2,12 +2,7 @@
 
 ## Currently supported distros
 
-
-
 **[<kbd> <br> Fedora Everything <br> </kbd>][Fedora]** 
-
-<div align = center>
-</div>
 
 ## bash script
 
