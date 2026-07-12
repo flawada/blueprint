@@ -1,10 +1,10 @@
 # In work and mainly for myself.
 
-## Currently supported distros
+## Supported distros
 
 **[<kbd> <br> Fedora Everything <br> </kbd>][Fedora]** 
 
-## bash script
+## Bash script
 
 ```bash
 bash <(curl "https://raw.githubusercontent.com/flawada/blueprint/main/setup.sh")
