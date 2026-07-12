@@ -2,10 +2,11 @@
 
 ## Currently only works for fedora (fedora everything).
 
-<div align = center>
+
 
 **[<kbd> <br> Fedora <br> </kbd>][Fedora]** 
 
+<div align = center>
 </div>
 
 ## bash script
