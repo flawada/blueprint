@@ -1,4 +1,4 @@
-## Fedora Everything
+## Fedora Everything (WIP)
 
 https://fedoraproject.org/misc/#everything
 
@@ -7,8 +7,7 @@ Software selection:
 - additional software for selected environment -> if you are on a VM: Guest Agents; If you use wifi: Common Networkmanager
 - Submodules
   
-Rest (WIP):
-- You have to figure out the rest by yourself (mostly just common sense)
+Rest :
 - After installation log in and run the [bash script][bash]
 
 [bash]: https://github.com/flawada/blueprint/tree/main#bash-script
