@@ -6,4 +6,6 @@ Software selection:
   
 Rest (WIP):
 - You have to figure out the rest by yourself (mostly just common sense)
-- After installation run the bash script
+- After installation run the [bash script][bash]
+
+[bash]: https://github.com/flawada/blueprint/tree/main#bash-script
