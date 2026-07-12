@@ -15,6 +15,4 @@
 bash <(curl "https://raw.githubusercontent.com/flawada/blueprint/main/setup.sh")
 ```
 
-## wip
-
 [Fedora]: ./blueprints/fedora/README.md
