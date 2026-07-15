@@ -65,9 +65,9 @@ fi
 
 OS=($(curl -s "https://api.github.com/repos/flawada/blueprint/contents/blueprints" | grep "name" | cut -d '"' -f 4))
 if [[ "${OS[*]}" == "$ID" ]]; then
-    printf "┣ %bSystem: %s [supported]%b\n" "$GREEN" "$PRETTY_NAME" "$NC"
+    printf "┣ %b%s [supported]%b\n" "$GREEN" "$PRETTY_NAME" "$NC"
 else
-    printf "┣ %bSystem: %s [unsupported]%b\n" "$RED" "$PRETTY_NAME" "$NC"
+    printf "┣ %b%s [unsupported]%b\n" "$RED" "$PRETTY_NAME" "$NC"
     exit 1
 fi
 
