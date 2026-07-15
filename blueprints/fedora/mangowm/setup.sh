@@ -9,6 +9,24 @@ BLUE='\033[0;94m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
+function o() {
+  while ! "$@"; do
+    printf "Command failed.\n"
+
+    printf "r = Retry this command\n"
+    printf "e = Exit\n"
+    printf "s = Skip this command\n"
+
+    read -p "[R/e/s]: " p
+    case $p in
+      [Ee])  printf "Exiting..\n";exit ;;
+      [Ss]) printf "Skipping..\n"; break;;
+      *) printf "Retrying..\n" ;;
+    esac
+
+  done
+}
+
 clear
 
 printf "$(cat << EOF
