@@ -12,7 +12,7 @@ NC='\033[0m'
 function c() {
   while ! "$@"; do
     printf "\n%bCommand \"%b%s%b\" failed%b\n" "$RED" "$YELLOW" "$*" "$RED" "$NC"
-    printf "%bYou might need to fix this problem manually before proceeding%b\n\n" "$YELLOW" "$NC"
+    printf "%bYou might need to fix this problem manually before proceeding%b\n\n" "$RED" "$NC"
     printf "r = Retry this command\n"
     printf "e = Exit\n"
     printf "s = Skip this command\n"
