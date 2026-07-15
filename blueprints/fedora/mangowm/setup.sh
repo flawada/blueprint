@@ -29,6 +29,12 @@ function c() {
   done
 }
 
+function printc () {
+  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+  printf "%b$1..%b\n" "$BLUE" "$NC"
+  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+}
+
 clear
 
 printf "$(cat << EOF
@@ -40,59 +46,39 @@ ${NC}
 EOF
 )"
 
-printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-printf "%bUpdating system..%b\n" "$BLUE" "$NC"
-printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+printc "Updating system"
 c sudo dnf update --refresh -y
 
 if ! rpm -q terra-release &>/dev/null; then
-  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-  printf "%bInstalling terra repository..%b\n" "$BLUE" "$NC"
-  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+  printc "Installing terra repository"
   c sudo dnf in -y --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
 fi
 
 if ! [[ -f "/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:leloubil:wl-clip-persist.repo" ]];then
-  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-  printf "%bInstalling wl-clip-persist copr-repository..%b\n" "$BLUE" "$NC"
-  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+  printc "Installing wl-clip-persist copr-repository"
   c sudo dnf copr enable -y leloubil/wl-clip-persist
 fi
 
 
-printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-printf "%bInstalling mangowm..%b\n" "$BLUE" "$NC"
-printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+printc "%bInstalling mangowm"
 c sudo dnf in -y mangowm
-printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-printf "%bInstalling system basics..%b\n" "$BLUE" "$NC"
-printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+printc "Installing system basics"
 c sudo dnf in -y xdg-desktop-portal xdg-desktop-portal-wlr xorg-x11-server-Xwayland xfce-polkit zsh
-printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-printf "%bInstalling dotfile requirements..%b\n" "$BLUE" "$NC"
-printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+printc "Installing dotfile requirements"
 c sudo dnf in -y mako waybar wlogout blueman-manager pavucontrol nmtui playerctl wlsunset swaybg gtklock rofi wl-clip-persist cliphist eza tar git
-printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-printf "%bInstalling core apps..%b\n" "$BLUE" "$NC"
-printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+printc "Installing core apps"
 c sudo dnf in -y firefox ghostty loupe gedit thunar thunar-archive-plugin file-roller xdg-user-dirs
 
-if ! [[ -f "$HOME/.config/user-dirs.dirs" ]]; then
-  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-  printf "%bCreating user directories..%b\n" "$BLUE" "$NC"
-  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+if ! [[ -f "$HOME/.config/user-dirs.dirs" ]]; the
+  printc "Creating user directories"
   c xdg-user-dirs-update
 fi
 
-printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-printf "%bDownloading dotfiles..%b\n" "$BLUE" "$NC"
-printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+printc "Downloading dotfiles"
 c curl -Lf https://raw.githubusercontent.com/flawada/blueprint/main/blueprints/fedora/mangowm/files.tar | tar -xf - --strip-components=1 -C "$HOME"
 
 if ! [[ -d "$HOME/.zsh/zsh-autosuggestions" && -d "$HOME/.zsh/zsh-syntax-highlighting" ]]; then
-  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-  printf "%bDownloading zsh plugins..%b\n\n" "$BLUE" "$NC"
-  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+  printc "Downloading zsh plugins"
   if ! [ -d "$HOME/.zsh/zsh-autosuggestions" ]; then
     c git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions "$HOME/.zsh/zsh-autosuggestions"
   fi
@@ -102,23 +88,17 @@ if ! [[ -d "$HOME/.zsh/zsh-autosuggestions" && -d "$HOME/.zsh/zsh-syntax-highlig
 fi
 
 if ! [ -d "$HOME/.config/ghostty/shaders" ]; then
-  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-  printf "%bDownloading ghostty cursor shaders..%b\n" "$BLUE" "$NC"
-  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+  printc "Downloading ghostty cursor shaders"
   c git clone https://github.com/sahaj-b/ghostty-cursor-shaders ~/.config/ghostty/shaders
 fi
 
 if ! command -v starship &> /dev/null; then
-  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-  printf "%bInstalling starship..%b\n" "$BLUE" "$NC"
-  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+  printc "Installing starship"
   c curl -sS https://starship.rs/install.sh | sh -s -- -y
 fi
 
 if ! [ -d "$HOME/.themes/Graphite-Dark" ]; then
-  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-  printf "%bDownloading graphite-gtk-theme..%b\n" "$BLUE" "$NC"
-  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+  printc "Downloading graphite-gtk-theme"
   sassc=0
   if ! rpm -q sassc &>/dev/null; then
     c sudo dnf in -y sassc
@@ -128,43 +108,37 @@ if ! [ -d "$HOME/.themes/Graphite-Dark" ]; then
   c cd Graphite-gtk-theme
   c ./install.sh -c dark
   c cd ..
-  rm -rf Graphite-gtk-theme
+  c rm -rf Graphite-gtk-theme
   if [[ $sassc -eq 1 ]]; then
     c sudo dnf rm -y sassc
   fi
 fi
 
 if ! [ -f "$HOME/.config/mango/wallpaper.png" ]; then
-  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-  printf "%bDownloading wallpaper..%b\n" "$BLUE" "$NC"
-  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+  printc "Downloading wallpaper"
   c curl -Lfo "$HOME/.config/mango/wallpaper.png" https://w.wallhaven.cc/full/5y/wallhaven-5yr153.png
 fi
 
-if ! [[ "$SHELL" == *"zsh"* ]]; then
-  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-  printf "%bEnabling zsh..%b\n" "$BLUE" "$NC"
-  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+if ! [[ "$SHELL" == *"zsh"* ]]; the
+  printc "Enabling zsh"
   c sudo chsh -s "$(which zsh)" "$USER"
 fi
 
 if ! grep -q -- "--autologin $USER" /etc/systemd/system/getty@tty1.service.d/override.conf &> /dev/null; then
-  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-  printf "%bEnabling autologin..%b\n" "$BLUE" "$NC"
-  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-  printf '[Service]\nExecStart=\nExecStart=-/usr/sbin/agetty --autologin %s --noclear %%I $TERM\n' "$USER" | sudo systemctl edit getty@tty1 --stdin
+  printc "Enabling autologin"
+  c printf '[Service]\nExecStart=\nExecStart=-/usr/sbin/agetty --autologin %s --noclear %%I $TERM\n' "$USER" | sudo systemctl edit getty@tty1 --stdin
   c sudo systemctl daemon-reload
 fi
 
 if grep -q "0x10de" /sys/bus/pci/devices/*/vendor && ! rpm -q akmods; then
   printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
   printf "%bNvidia hardware detected. Install rpmfusion?\nNote: This will install modern drivers. Dont use if you have a legacy card.%b\n" "$BLUE" "$NC"
-  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
   while true; do
     read -rn 1 -p "(y/n): " yn
     printf "\n"
     case $yn in
       [Yy]* )
+        printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
         c sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
         c sudo dnf install -y  gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs xorg-x11-drv-nvidia-libs.i686
         printf "%bCompiling driver modules.. Do not power off your machine. This can take up to 5 minutes.%b\n" "$BLUE" "$NC"
