@@ -60,7 +60,7 @@ if ! [[ -f "/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:leloubil:wl-clip-pe
 fi
 
 
-printc "%bInstalling mangowm"
+printc "Installing mangowm"
 c sudo dnf in -y mangowm
 printc "Installing system basics"
 c sudo dnf in -y xdg-desktop-portal xdg-desktop-portal-wlr xorg-x11-server-Xwayland xfce-polkit zsh
