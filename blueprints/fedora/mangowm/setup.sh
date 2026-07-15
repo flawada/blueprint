@@ -16,7 +16,7 @@ function c() {
     printf "r = Retry this command\n"
     printf "e = Exit\n"
     printf "s = Skip this command\n"
-    printf "or enter a command to run it\n"
+    printf "or enter a command to run\n"
     while true;do
       read -rp "[r/e/s]: " p < /dev/tty
       case $p in
