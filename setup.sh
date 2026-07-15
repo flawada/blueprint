@@ -89,6 +89,6 @@ fi
 printf "%bBlueprint %s selected%b\n" "$GREEN" "$blueprint" "$NC"
 
 printc "Redirecting"
-if c sudo -v; then
-    c bash <(curl -LfsS https://raw.githubusercontent.com/flawada/blueprint/main/blueprints/$ID/$blueprint/setup.sh)
+if sudo -v; then
+    bash <(curl -LfsS https://raw.githubusercontent.com/flawada/blueprint/main/blueprints/$ID/$blueprint/setup.sh)
 fi
