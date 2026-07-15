@@ -9,7 +9,7 @@ BLUE='\033[0;94m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
-function o() {
+function c() {
   while ! "$@"; do
     printf "Command failed.\n"
     printf "r = Retry this command\n"
@@ -17,11 +17,10 @@ function o() {
     printf "s = Skip this command\n"
     read -p "[R/e/s]: " p
     case $p in
-      [Ee])  printf "Exiting..\n";exit ;;
-      [Ss]) printf "Skipping..\n"; break;;
+      [Ee])  printf "Exiting..\n";exit 1 ;;
+      [Ss]) printf "Skipping..\n"; return 0 ;;
       *) printf "Retrying..\n" ;;
     esac
-
   done
 }
 
@@ -38,51 +37,51 @@ EOF
 
 printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
 printf "%bUpdating system..%b\n" "$BLUE" "$NC"
-sudo dnf update --refresh -y
+c sudo dnf update --refresh -y
 printf "%bUpdated system%b\n" "$GREEN" "$NC"
 
 if ! rpm -q terra-release &>/dev/null; then
   printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
   printf "%bInstalling terra repository..%b\n" "$BLUE" "$NC"
-  sudo dnf in -y --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
+  c sudo dnf in -y --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
   printf "%bInstalled terra repository%b\n" "$GREEN" "$NC"
 fi
 
 if ! [[ -f "/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:leloubil:wl-clip-persist.repo" ]];then
   printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
 printf "%bInstalling wl-clip-persist copr-repository..%b\n" "$BLUE" "$NC"
-  sudo dnf copr enable -y leloubil/wl-clip-persist
+  c sudo dnf copr enable -y leloubil/wl-clip-persist
   printf "%bInstalled wl-clip-persist copr-repository%b\n" "$GREEN" "$NC"
 fi
 
 
 printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
 printf "%bInstalling mangowm..%b\n" "$BLUE" "$NC"
-sudo dnf in -y mangowm
+c sudo dnf in -y mangowm
 printf "%bInstalled mangowm%b\n" "$GREEN" "$NC"
 printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
 printf "%bInstalling system basics..%b\n" "$BLUE" "$NC"
-sudo dnf in -y xdg-desktop-portal xdg-desktop-portal-wlr xorg-x11-server-Xwayland xfce-polkit zsh
+c sudo dnf in -y xdg-desktop-portal xdg-desktop-portal-wlr xorg-x11-server-Xwayland xfce-polkit zsh
 printf "%bInstalled system basics%b\n" "$GREEN" "$NC"
 printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
 printf "%bInstalling dotfile requirements..%b\n" "$BLUE" "$NC"
-sudo dnf in -y mako waybar wlogout blueman-manager pavucontrol nmtui playerctl wlsunset swaybg gtklock rofi wl-clip-persist cliphist eza tar git
+c sudo dnf in -y mako waybar wlogout blueman-manager pavucontrol nmtui playerctl wlsunset swaybg gtklock rofi wl-clip-persist cliphist eza tar git
 printf "%bInstalled dotfile requirements%b\n" "$GREEN" "$NC"
 printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
 printf "%bInstalling core apps..%b\n" "$BLUE" "$NC"
-sudo dnf in -y firefox ghostty loupe gedit thunar thunar-archive-plugin file-roller xdg-user-dirs
+c sudo dnf in -y firefox ghostty loupe gedit thunar thunar-archive-plugin file-roller xdg-user-dirs
 printf "%bInstalled core apps%b\n" "$GREEN" "$NC"
 
 if ! [[ -f "$HOME/.config/user-dirs.dirs" ]]; then
   printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
   printf "%bCreating user directories..%b\n" "$BLUE" "$NC"
-  xdg-user-dirs-update
+  c xdg-user-dirs-update
   printf "%bCreated user directories%b\n" "$GREEN" "$NC"
 fi
 
 printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
 printf "%bDownloading dotfiles..%b\n" "$BLUE" "$NC"
-curl -Lf https://raw.githubusercontent.com/flawada/blueprint/main/blueprints/fedora/mangowm/files.tar | tar -xf - --strip-components=1 -C "$HOME"
+c curl -Lf https://raw.githubusercontent.com/flawada/blueprint/main/blueprints/fedora/mangowm/files.tar | tar -xf - --strip-components=1 -C "$HOME"
 printf "%bDownloaded dotfiles%b\n" "$GREEN" "$NC"
 
 # add checksum check
@@ -92,10 +91,10 @@ if ! [[ -d "$HOME/.zsh/zsh-autosuggestions" && -d "$HOME/.zsh/zsh-syntax-highlig
   printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
   printf "%bDownloading zsh plugins..%b\n\n" "$BLUE" "$NC"
   if ! [ -d "$HOME/.zsh/zsh-autosuggestions" ]; then
-    git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions "$HOME/.zsh/zsh-autosuggestions"
+    c git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions "$HOME/.zsh/zsh-autosuggestions"
   fi
   if ! [ -d "$HOME/.zsh/zsh-syntax-highlighting" ]; then
-    git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting "$HOME/.zsh/zsh-syntax-highlighting"
+    c git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting "$HOME/.zsh/zsh-syntax-highlighting"
   fi
   printf "%bDownloaded zsh plugins%b\n" "$GREEN" "$NC"
 fi
@@ -103,14 +102,14 @@ fi
 if ! [ -d "$HOME/.config/ghostty/shaders" ]; then
   printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
   printf "%bDownloading ghostty cursor shaders..%b\n" "$BLUE" "$NC"
-  git clone https://github.com/sahaj-b/ghostty-cursor-shaders ~/.config/ghostty/shaders
+  c git clone https://github.com/sahaj-b/ghostty-cursor-shaders ~/.config/ghostty/shaders
   printf "%bDownloaded ghostty cursor shaders%b\n" "$GREEN" "$NC"
 fi
 
 if ! command -v starship &> /dev/null; then
   printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
   printf "%bInstalling starship..%b\n" "$BLUE" "$NC"
-  curl -sS https://starship.rs/install.sh | sh -s -- -y
+  c curl -sS https://starship.rs/install.sh | sh -s -- -y
   printf "%bInstalled starship%b\n" "$GREEN" "$NC"
 fi
 
@@ -119,16 +118,16 @@ if ! [ -d "$HOME/.themes/Graphite-Dark" ]; then
   printf "%bDownloading graphite-gtk-theme..%b\n" "$BLUE" "$NC"
   sassc=0
   if ! rpm -q sassc &>/dev/null; then
-    sudo dnf in -y sassc
+    c sudo dnf in -y sassc
     sassc=1
   fi
-  git clone --depth 1 https://github.com/vinceliuice/Graphite-gtk-theme
-  cd Graphite-gtk-theme
-  ./install.sh -c dark
-  cd ..
+  c git clone --depth 1 https://github.com/vinceliuice/Graphite-gtk-theme
+  c cd Graphite-gtk-theme
+  c ./install.sh -c dark
+  c cd ..
   rm -rf Graphite-gtk-theme
   if [[ $sassc -eq 1 ]]; then
-    sudo dnf rm -y sassc
+    c sudo dnf rm -y sassc
   fi
   printf "%bDownloaded graphite-gtk-theme%b\n" "$GREEN" "$NC"
 fi
@@ -136,14 +135,14 @@ fi
 if ! [ -f "$HOME/.config/mango/wallpaper.png" ]; then
   printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
   printf "%bDownloading wallpaper..%b\n" "$BLUE" "$NC"
-  curl -Lfo "$HOME/.config/mango/wallpaper.png" https://w.wallhaven.cc/full/5y/wallhaven-5yr153.png
+  c curl -Lfo "$HOME/.config/mango/wallpaper.png" https://w.wallhaven.cc/full/5y/wallhaven-5yr153.png
   printf "%bDownloaded wallpaper%b\n" "$GREEN" "$NC"
 fi
 
 if ! [[ "$SHELL" == *"zsh"* ]]; then
   printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
   printf "%bEnabling zsh..%b\n" "$BLUE" "$NC"
-  sudo chsh -s "$(which zsh)" "$USER"
+  c sudo chsh -s "$(which zsh)" "$USER"
   printf "%bEnabled zsh%b\n" "$GREEN" "$NC"
 fi
 
@@ -151,7 +150,8 @@ if ! grep -q -- "--autologin $USER" /etc/systemd/system/getty@tty1.service.d/ove
   printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
   printf "%bEnabling autologin..%b\n" "$BLUE" "$NC"
   printf '[Service]\nExecStart=\nExecStart=-/usr/sbin/agetty --autologin %s --noclear %%I $TERM\n' "$USER" | sudo systemctl edit getty@tty1 --stdin
-  sudo systemctl daemon-reload
+  ## add c correctly
+  c sudo systemctl daemon-reload
   printf "%bEnabled autologin%b\n" "$GREEN" "$NC"
 fi
 
@@ -163,8 +163,8 @@ if grep -q "0x10de" /sys/bus/pci/devices/*/vendor && ! rpm -q akmods; then
     printf "\n"
     case $yn in
       [Yy]* )
-        sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-        sudo dnf install -y  gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs xorg-x11-drv-nvidia-libs.i686
+        c sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+        c sudo dnf install -y  gcc kernel-headers kernel-devel akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs xorg-x11-drv-nvidia-libs.i686
         printf "%bCompiling driver modules.. Do not power off your machine. This can take up to 5 minutes.%b\n" "$BLUE" "$NC"
         sleep 10
         if ! sudo akmods; then
@@ -174,7 +174,7 @@ if grep -q "0x10de" /sys/bus/pci/devices/*/vendor && ! rpm -q akmods; then
         clear
         printf "%bDone. Rebooting in 10s..%b\n" "$GREEN" "$NC"
         sleep 10
-        sudo reboot
+        c sudo reboot
         break;;
       [Nn]* ) break;;
       * ) printf "%bInvalid.%b\n" "$YELLOW" "$NC";;
@@ -185,4 +185,4 @@ fi
 clear
 printf "%bDone. relogging in 10s..%b\n" "$GREEN" "$NC"
 sleep 10
-loginctl terminate-user $USER
+c loginctl terminate-user $USER
