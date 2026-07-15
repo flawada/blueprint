@@ -3,11 +3,38 @@
 set -euo pipefail
 
 # colors
-RED='\033[0;31m'
-YELLOW='\033[0;33m'
-BLUE='\033[0;94m'
-GREEN='\033[0;32m'
-NC='\033[0m'
+export RED='\033[0;31m'
+export YELLOW='\033[0;33m'
+export BLUE='\033[0;94m'
+export GREEN='\033[0;32m'
+export NC='\033[0m'
+
+# functions
+export -f c() {
+  while ! "$@"; do
+    printf "\n%bCommand \"%b%s%b\" failed%b\n" "$RED" "$YELLOW" "$*" "$RED" "$NC"
+    printf "%bYou might need to fix this problem manually before proceeding%b\n\n" "$RED" "$NC"
+    printf "r = Retry this command\n"
+    printf "e = Exit\n"
+    printf "s = Skip this command\n"
+    printf "or enter a command to run\n"
+    while true;do
+      read -rp "[r/e/s]: " p < /dev/tty
+      case $p in
+        [Rr]) printf "%bRetrying..%b\n" "$BLUE" "$NC"; break ;;
+        [Ee])  printf "%bExiting..%b\n" "$RED" "$NC"; exit 1 ;;
+        [Ss]) printf "%bSkipped this command%b\n" "$YELLOW" "$NC"; return 0 ;;
+        *) $p || true ;;
+      esac
+    done
+  done
+}
+
+export -f printc () {
+  printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+  printf "%b$1..%b\n" "$BLUE" "$NC"
+  printf "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+}
 
 clear
 
