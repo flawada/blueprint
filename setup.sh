@@ -53,15 +53,14 @@ ${NC}
 EOF
 )"
 
-printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-
-printf "%bChecking System..%b\n" "$BLUE" "$NC"
+printc "Checking System"
 if [ -f /etc/os-release ]; then
     source /etc/os-release
 else
     printf "%bError: /etc/os-release does not exist. %b\n" "$RED" "$NC"
     exit 1
 fi
+
 OS=($(curl -s "https://api.github.com/repos/flawada/blueprint/contents/blueprints" | grep "name" | cut -d '"' -f 4))
 if [[ "${OS[*]}" == "$ID" ]]; then
     printf "%bSystem: %s [supported]%b\n" "$GREEN" "$PRETTY_NAME" "$NC"
@@ -70,9 +69,7 @@ else
     exit 1
 fi
 
-printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-
-printf "%bLoading blueprints..%b\n" "$BLUE" "$NC"
+printc "Loading blueprints"
 blueprints=($(curl -s "https://api.github.com/repos/flawada/blueprint/contents/blueprints/$ID" | grep "name" | grep -v "README.md" | cut -d '"' -f 4))
 if [ "${#blueprints[@]}" -eq 0 ]; then
     printf "%bError: No blueprint found. %b\n" "$RED" "$NC"
@@ -89,11 +86,9 @@ else
         fi
     done
 fi
-printf "%bBlueprint %s selected%b\n" "$GREEN" "$blueprint" "$NC"
+printf "%bBlueprint %s selected%b\n" "$BLUE" "$blueprint" "$NC"
 
-printf "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-
-printf "%bRedirecting..%b\n" "$BLUE" "$NC"
+printc "Redirecting"
 if sudo -v; then
     bash <(curl -LfsS https://raw.githubusercontent.com/flawada/blueprint/main/blueprints/$ID/$blueprint/setup.sh)
 fi
