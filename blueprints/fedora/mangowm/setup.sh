@@ -11,15 +11,15 @@ NC='\033[0m'
 
 function c() {
   while ! "$@"; do
-    printf "\nCommand \"%s\" failed.\n" "$*"
+    printf "\n%bCommand \"%b%s%b\" failed.%b\n" "$RED" "$NC" "$*" "$RED" "$NC"
     printf "r = Retry this command\n"
     printf "e = Exit\n"
     printf "s = Skip this command\n"
     read -rp "[R/e/s]: " p
     case $p in
-      [Ee])  printf "Exiting..\n"; exit 1 ;;
-      [Ss]) printf "Skipping..\n"; return 0 ;;
-      *) printf "Retrying..\n" ;;
+      [Ee])  printf "%bExiting..%b\n" "$RED" "$NC"; exit 1 ;;
+      [Ss]) printf "%bSkipped this command%b\n" "$YELLOW" "$NC"; return 0 ;;
+      *) printf "%bRetrying..%b\n "$BLUE" "$NC"" ;;
     esac
   done
 }
