@@ -52,6 +52,8 @@ printf "$(cat << EOF
 ┃${BLUE} ▄▄██▀ ██▄▄▄   ██   ▀███▀ ██     ${NC}┃
 ┃                                 ┃
 ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+┃
+┃
 EOF
 )"
 
@@ -67,14 +69,14 @@ OS=($(curl -s "https://api.github.com/repos/flawada/blueprint/contents/blueprint
 if [[ "${OS[*]}" == "$ID" ]]; then
     printf "┣ %b%s [supported]%b\n" "$GREEN" "$PRETTY_NAME" "$NC"
 else
-    printf "┣ %b%s [unsupported]%b\n" "$RED" "$PRETTY_NAME" "$NC"
+    printf "┗ %b%s [unsupported]%b\n" "$RED" "$PRETTY_NAME" "$NC"
     exit 1
 fi
 
 printc "Loading blueprints"
 blueprints=($(curl -s "https://api.github.com/repos/flawada/blueprint/contents/blueprints/$ID" | grep "name" | grep -v "README.md" | cut -d '"' -f 4))
 if [ "${#blueprints[@]}" -eq 0 ]; then
-    printf "┣ %bError: No blueprint found. %b\n" "$RED" "$NC"
+    printf "┗ %bError: No blueprint found. %b\n" "$RED" "$NC"
     exit 1
 elif [ "${#blueprints[@]}" -eq 1 ]; then
     blueprint="${blueprints[0]}"
@@ -88,7 +90,7 @@ else
         fi
     done
 fi
-printf "┣ %bBlueprint %s selected%b\n" "$GREEN" "$blueprint" "$NC"
+printf "┣ %b%s [selected]%b\n" "$GREEN" "$blueprint" "$NC"
 
 printc "Redirecting"
 if sudo -v; then
