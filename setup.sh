@@ -33,9 +33,21 @@ c() {
 export -f c
 
 printc () {
-  printf "┃\n┃ ┏";printf '━%.0s' $(seq 1 $((${#1}+4))); printf "┓\n"
-  printf "┣━┫ %b%s..%b ┃" "$BLUE" "$1" "$NC"
-  printf "\n┃ ┗";printf '━%.0s' $(seq 1 $((${#1}+4))); printf "┛\n┃\n"
+  printf "\n┓\n┃"
+  printf "%*s" "$(( (COLUMNS - ${#1}+4) / 2 ))"
+  printf "┏"
+  printf '━%.0s' $(seq 1 $((${#1}+4)))
+  printf "┓\n"
+
+  printf "%*s┫" "$(( (COLUMNS - ${#1}+4) / 2 ))" | tr ' ' '━'
+  printf "%b%s..%b ┃" "$BLUE" "$1" "$NC"
+  printf '┣%*s\n' "$(( (COLUMNS - ${#1}+4) / 2 ))" '' | tr ' ' '━'
+
+  printf "\n┃"
+  printf "%*s" "$(( (COLUMNS - ${#1}+4) / 2 ))"
+  printf "┗"
+  printf '━%.0s' $(seq 1 $((${#1}+4)))
+  printf "┛\n┛\n\n"
 }
 
 export -f printc
