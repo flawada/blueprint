@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# NOTE: remove pipes for understandable fails and then delete < /dev/tty in main setup.sh
+# Add design
 
 set -euo pipefail
 
@@ -47,7 +47,9 @@ if ! [[ -f "$HOME/.config/user-dirs.dirs" ]]; then
 fi
 
 printc "Downloading dotfiles"
-c curl -Lf https://raw.githubusercontent.com/flawada/blueprint/main/blueprints/fedora/mangowm/files.tar | c tar -xf - --strip-components=1 -C "$HOME"
+c curl -Lf https://raw.githubusercontent.com/flawada/blueprint/main/blueprints/fedora/mangowm/files.tar -o /tmp/files.tar
+c tar -xf /tmp/files.tar --strip-components=1 -C "$HOME"
+
 
 if ! [[ -d "$HOME/.zsh/zsh-autosuggestions" && -d "$HOME/.zsh/zsh-syntax-highlighting" ]]; then
   printc "Downloading zsh plugins"
@@ -98,7 +100,12 @@ fi
 
 if ! grep -q -- "--autologin $USER" /etc/systemd/system/getty@tty1.service.d/override.conf &> /dev/null; then
   printc "Enabling autologin"
-  c printf '[Service]\nExecStart=\nExecStart=-/usr/sbin/agetty --autologin %s --noclear %%I $TERM\n' "$USER" | c sudo systemctl edit getty@tty1 --stdin
+  #c printf '[Service]\nExecStart=\nExecStart=-/usr/sbin/agetty --autologin %s --noclear %%I $TERM\n' "$USER" | c sudo systemctl edit getty@tty1 --stdin
+  c sudo systemctl edit getty@tty1 --stdin <<EOF
+[Service]
+ExecStart=
+ExecStart=-/usr/sbin/agetty --autologin $USER --noclear %I \$TERM
+EOF
   c sudo systemctl daemon-reload
 fi
 
