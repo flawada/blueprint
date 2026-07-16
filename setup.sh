@@ -33,21 +33,21 @@ c() {
 export -f c
 
 printc () {
-  printf "%*s" "$(( (COLUMNS - ${#1}-8) / 2 ))"
+  printf "%*s" "$(( (COLUMNS - ${#1} - 8) / 2 ))"
   printf "┏"
-  printf '━%.0s' $(seq 1 $((${#1}+6)))
+  printf "━%.0s" $(seq 1 $((${#1} + 6)))
   printf "┓\n"
 
-  printf '━%.0s' $(seq 1 $(( (COLUMNS - ${#1}-8) / 2 )))
+  printf "━%.0s" $(seq 1 $(( (COLUMNS - ${#1} - 8) / 2 )))
   printf "┫"
   printf "  %b%s..%b  " "$BLUE" "$1" "$NC"
   printf "┣"
-  printf '━%.0s' $(seq 1 $(( (COLUMNS - ${#1}-8) / 2 )))
+  printf "━%.0s" $(seq 1 $(( (COLUMNS - ${#1} - 8) / 2 )))
   printf "\n"
 
-  printf "%*s" "$(( (COLUMNS - ${#1}-8) / 2 ))"
+  printf "%*s" "$(( (COLUMNS - ${#1} - 8) / 2 ))"
   printf "┗"
-  printf '━%.0s' $(seq 1 $((${#1}+6)))
+  printf "━%.0s" $(seq 1 $((${#1} + 6)))
   printf "┛\n\n"
 }
 
@@ -57,12 +57,12 @@ export -f printc
 
 clear
 
-printf "$(cat << EOF
-${BLUE} ▄▄▄▄ ▄▄▄▄▄ ▄▄▄▄▄▄ ▄▄ ▄▄ ▄▄▄▄ ${NC}
-${BLUE}███▄▄ ██▄▄    ██   ██ ██ ██▄█▀${NC}
-${BLUE}▄▄██▀ ██▄▄▄   ██   ▀███▀ ██   ${NC}
-EOF
-)\n"
+printf "%*s" "$(( (COLUMNS - 20) / 2 ))"
+printf "%b ▄▄▄▄ ▄▄▄▄▄ ▄▄▄▄▄▄ ▄▄ ▄▄ ▄▄▄▄ %b\n" "$BLUE" "$NC"
+printf "%*s" "$(( (COLUMNS - 20) / 2 ))"
+printf "%b███▄▄ ██▄▄    ██   ██ ██ ██▄█▀%b\n" "$BLUE" "$NC"
+printf "%*s" "$(( (COLUMNS - 20) / 2 ))"
+printf "%b▄▄██▀ ██▄▄▄   ██   ▀███▀ ██   %b\n" "$BLUE" "$NC"
 
 printc "Checking system"
 if [ -f /etc/os-release ]; then
