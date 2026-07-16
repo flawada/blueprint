@@ -19,7 +19,7 @@ c() {
     printf "s = Skip this command\n"
     printf "or enter a command to run\n"
     while true;do
-      read -rp "[r/e/s]: " p
+      read -rp "[r/e/s]: " p < /dev/tty
       case $p in
         [Rr]) printf "%bRetrying..%b\n" "$BLUE" "$NC"; break ;;
         [Ee])  printf "%bExiting..%b\n" "$RED" "$NC"; exit 1 ;;
