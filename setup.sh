@@ -33,6 +33,7 @@ c() {
 export -f c
 
 printc () {
+  printf "\n"
   printf "%*s" "$(( (COLUMNS - ${#1} - 8) / 2 ))"
   printf "┏"
   printf "━%.0s" $(seq 1 $((${#1} + 6)))
@@ -57,12 +58,12 @@ export -f printc
 
 clear
 
-printf "%*s" "$(( (COLUMNS - 20) / 2 ))"
+printf "%*s" "$(( (COLUMNS - 30) / 2 ))"
 printf "%b ▄▄▄▄ ▄▄▄▄▄ ▄▄▄▄▄▄ ▄▄ ▄▄ ▄▄▄▄ %b\n" "$BLUE" "$NC"
-printf "%*s" "$(( (COLUMNS - 20) / 2 ))"
+printf "%*s" "$(( (COLUMNS - 30) / 2 ))"
 printf "%b███▄▄ ██▄▄    ██   ██ ██ ██▄█▀%b\n" "$BLUE" "$NC"
-printf "%*s" "$(( (COLUMNS - 20) / 2 ))"
-printf "%b▄▄██▀ ██▄▄▄   ██   ▀███▀ ██   %b\n" "$BLUE" "$NC"
+printf "%*s" "$(( (COLUMNS - 30) / 2 ))"
+printf "%b▄▄██▀ ██▄▄▄   ██   ▀███▀ ██   %b\n\n" "$BLUE" "$NC"
 
 printc "Checking system"
 if [ -f /etc/os-release ]; then
