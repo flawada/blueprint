@@ -5,7 +5,7 @@ set -euo pipefail
 clear
 
 if [[ $COLUMNS -lt 75 ]]; then
-  printf "*  %bINSTALLATION%b\n\n" "$BLUE" "$NC"
+  printf "* %bINSTALLATION%b\n\n" "$BLUE" "$NC"
 else
   printf "%*s" "$(( (COLUMNS - 72) / 2 ))"
   printf "%b██ ▄▄  ▄▄ ▄▄▄▄▄▄ ▄▄▄▄ ▄▄▄▄▄▄ ▄▄▄  ▄▄    ▄▄     ▄▄▄ ▄▄▄▄▄▄ ▄▄  ▄▄▄  ▄▄  ▄▄%b\n" "$BLUE" "$NC"
