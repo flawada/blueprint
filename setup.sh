@@ -33,6 +33,10 @@ c() {
 export -f c
 
 printc () {
+  if [[ $COLUMNS -lt 72 ]]; then
+    printf "- %b%s..%b" "$BLUE" "$1" "$NC"
+    return 0
+  fi
   printf "\n"
   printf "%*s" "$(( (COLUMNS - ${#1} - 8) / 2 ))"
   printf "┏"
@@ -58,12 +62,16 @@ export -f printc
 
 clear
 
-printf "%*s" "$(( (COLUMNS - 30) / 2 ))"
-printf "%b ▄▄▄▄ ▄▄▄▄▄ ▄▄▄▄▄▄ ▄▄ ▄▄ ▄▄▄▄ %b\n" "$BLUE" "$NC"
-printf "%*s" "$(( (COLUMNS - 30) / 2 ))"
-printf "%b███▄▄ ██▄▄    ██   ██ ██ ██▄█▀%b\n" "$BLUE" "$NC"
-printf "%*s" "$(( (COLUMNS - 30) / 2 ))"
-printf "%b▄▄██▀ ██▄▄▄   ██   ▀███▀ ██   %b\n\n" "$BLUE" "$NC"
+if [[ $COLUMNS -lt 72 ]]; then
+  printf "*  %bSETUP%b\n\n" "$BLUE" "$NC"
+else
+  printf "%*s" "$(( (COLUMNS - 30) / 2 ))"
+  printf "%b ▄▄▄▄ ▄▄▄▄▄ ▄▄▄▄▄▄ ▄▄ ▄▄ ▄▄▄▄ %b\n" "$BLUE" "$NC"
+  printf "%*s" "$(( (COLUMNS - 30) / 2 ))"
+  printf "%b███▄▄ ██▄▄    ██   ██ ██ ██▄█▀%b\n" "$BLUE" "$NC"
+  printf "%*s" "$(( (COLUMNS - 30) / 2 ))"
+  printf "%b▄▄██▀ ██▄▄▄   ██   ▀███▀ ██   %b\n\n" "$BLUE" "$NC"
+fi
 
 printc "Checking system"
 if [ -f /etc/os-release ]; then
