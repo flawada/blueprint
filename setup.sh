@@ -81,8 +81,7 @@ else
     exit 1
 fi
 
-OS=($(curl -s "https://api.github.com/repos/flawada/blueprint/contents/install" | grep "name" | cut -d '"' -f 4))
-if [[ "${OS[*]}" == "$ID" ]]; then
+if if curl -s "https://api.github.com/repos/flawada/blueprint/contents/install" | grep "name" | grep -q $ID; then
     printf "%b%s [supported]%b\n" "$GREEN" "$PRETTY_NAME" "$NC"
 else
     printf "%b%s [unsupported]%b\n" "$RED" "$PRETTY_NAME" "$NC"
