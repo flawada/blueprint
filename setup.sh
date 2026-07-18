@@ -82,7 +82,7 @@ else
 fi
 
 # remove those evil ahh pipes after curl, replace by cat <() and then go back to grep -q
-if curl -s "https://api.github.com/repos/flawada/blueprint/contents/install" | grep "name" | grep "$ID" > /dev/null 2>&1; then
+if curl -s "https://api.github.com/repos/flawada/blueprint/contents/install" | grep "name" | grep '"'$ID'"'> /dev/null 2>&1; then
     printf "%b%s [supported]%b\n" "$GREEN" "$PRETTY_NAME" "$NC"
 else
     printf "%b%s [unsupported]%b\n" "$RED" "$PRETTY_NAME" "$NC"
