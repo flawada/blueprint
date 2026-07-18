@@ -81,7 +81,7 @@ else
     exit 1
 fi
 
-OS=($(curl -s "https://api.github.com/repos/flawada/blueprint/contents/blueprints" | grep "name" | cut -d '"' -f 4))
+OS=($(curl -s "https://api.github.com/repos/flawada/blueprint/contents/install" | grep "name" | cut -d '"' -f 4))
 if [[ "${OS[*]}" == "$ID" ]]; then
     printf "%b%s [supported]%b\n" "$GREEN" "$PRETTY_NAME" "$NC"
 else
@@ -90,7 +90,7 @@ else
 fi
 
 printc "Loading blueprints"
-blueprints=($(curl -s "https://api.github.com/repos/flawada/blueprint/contents/blueprints/$ID" | grep "name" | grep -v "README.md" | cut -d '"' -f 4))
+blueprints=($(curl -s "https://api.github.com/repos/flawada/blueprint/contents/install/$ID" | grep "name" | grep -v "README.md" | cut -d '"' -f 4))
 if [ "${#blueprints[@]}" -eq 0 ]; then
     printf "%bError: No blueprint found. %b\n" "$RED" "$NC"
     exit 1
@@ -110,5 +110,5 @@ printf "%b%s [selected]%b\n" "$GREEN" "$blueprint" "$NC"
 
 printc "Redirecting to install"
 if sudo -v; then
-    bash <(curl -LfsS https://raw.githubusercontent.com/flawada/blueprint/main/blueprints/$ID/$blueprint/setup.sh)
+    bash <(curl -LfsS https://raw.githubusercontent.com/flawada/blueprint/main/install/$ID/$blueprint/setup.sh)
 fi
