@@ -2,6 +2,10 @@
 
 set -euo pipefail
 
+#pipe exit
+trap "exit 1" TERM
+export TOP_PID=$$
+
 # colors
 export RED='\033[0;31m'
 export YELLOW='\033[0;33m'
@@ -12,18 +16,18 @@ export NC='\033[0m'
 # functions
 c() {
   while ! "$@"; do
-    printf "\n%bCommand \"%b%s%b\" failed%b\n" "$RED" "$YELLOW" "$*" "$RED" "$NC"
-    printf "%bYou might need to fix this problem manually before proceeding%b\n\n" "$RED" "$NC"
-    printf "r = Retry this command\n"
-    printf "e = Exit\n"
-    printf "s = Skip this command\n"
-    printf "or enter a command to run\n"
+    printf "\n%bCommand \"%b%s%b\" failed%b\n" "$RED" "$YELLOW" "$*" "$RED" "$NC" > /dev/tty
+    printf "%bYou might need to fix this problem manually before proceeding%b\n\n" "$RED" "$NC" > /dev/tty
+    printf "r = Retry this command\n" > /dev/tty
+    printf "e = Exit\n" > /dev/tty
+    printf "s = Skip this command\n" > /dev/tty
+    printf "or enter a command to run\n" > /dev/tty
     while true;do
       read -rp "[r/e/s]: " p < /dev/tty
       case $p in
-        [Rr]) printf "\n%bRetrying..%b\n" "$BLUE" "$NC"; break ;;
-        [Ee])  printf "\n%bExiting..%b\n" "$RED" "$NC"; exit 1 ;;
-        [Ss]) printf "\n%bSkipped this command%b\n" "$YELLOW" "$NC"; return 0 ;;
+        [Rr]) printf "\n%bRetrying..%b\n" "$BLUE" "$NC" > /dev/tty; break ;;
+        [Ee])  printf "\n%bExiting..%b\n" "$RED" "$NC" > /dev/tty; kill -s TERM $TOP_PID ;;
+        [Ss]) printf "\n%bSkipped this command%b\n" "$YELLOW" "$NC" > /dev/tty; return 0 ;;
         *) $p || true ;;
       esac
     done
@@ -82,7 +86,7 @@ else
 fi
 
 # commit to those evil ahh pipes
-if curl -sf "https://api.github.com/repos/flawada/blueprint/contents/install" | grep "name" | grep '"'$ID'"'> /dev/null 2>&1; then
+if c curl -sf "https://api.github.com/repos/flawada/blueprint/contents/install" | grep "name" | grep '"'$ID'"'> /dev/null 2>&1; then
     printf "%b%s [supported]%b\n" "$GREEN" "$PRETTY_NAME" "$NC"
 else
     printf "%b%s [unsupported]%b\n" "$RED" "$PRETTY_NAME" "$NC"
@@ -90,7 +94,7 @@ else
 fi
 
 printc "Loading blueprints"
-blueprints=($(curl -sf "https://api.github.com/repos/flawada/blueprint/contents/install/$ID" | grep "name" | grep -v "README.md" | cut -d '"' -f 4))
+blueprints=($(c curl -sf "https://api.github.com/repos/flawada/blueprint/contents/install/$ID" | grep "name" | grep -v "README.md" | cut -d '"' -f 4))
 if [ "${#blueprints[@]}" -eq 0 ]; then
     printf "%bError: No blueprint found. %b\n" "$RED" "$NC"
     exit 1
