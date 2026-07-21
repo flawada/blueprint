@@ -4,7 +4,7 @@ set -euo pipefail
 
 # pipe exit
 trap "exit 1" TERM
-export TOP_PID=$$
+export PID=$$
 
 # colors
 export RED='\033[0;31m'
@@ -26,7 +26,7 @@ c() {
       read -rp "[r/e/s]: " p < /dev/tty
       case $p in
         [Rr]) printf "\n%bRetrying..%b\n" "$BLUE" "$NC" > /dev/tty; break ;;
-        [Ee])  printf "\n%bExiting..%b\n" "$RED" "$NC" > /dev/tty; kill -s TERM $TOP_PID; exit 1 ;;
+        [Ee])  printf "\n%bExiting..%b\n" "$RED" "$NC" > /dev/tty; kill -s TERM $PID; exit 1 ;;
         [Ss]) printf "\n%bSkipped this command%b\n" "$YELLOW" "$NC" > /dev/tty; return 0 ;;
         *) $p || true ;;
       esac
