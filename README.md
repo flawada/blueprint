@@ -1,5 +1,8 @@
 # setup
-mainly for myself
+
+detects the linux distro, checks the available post-install scripts and runs one.
+
+mainly for myself.
 
 ## Supported distros
 
