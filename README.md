@@ -10,3 +10,8 @@ mainly for myself
 ```bash
 bash <(curl "https://raw.githubusercontent.com/flawada/blueprint/main/setup.sh")
 ```
+
+## Todo
+
+- distro: bedrock linux (debian) | de: niri? 
+- distro: nixos | de: kde?
